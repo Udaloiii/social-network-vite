@@ -5,9 +5,15 @@ import {NavLink} from "react-router-dom";
 export const Navigation: FC = () => {
     return (
         <StyleNavigation>
-            <NavLink to='/profile'>Profile</NavLink>
-            <NavLink to='/messages'>Messages</NavLink>
-            <NavLink to='/news'>News</NavLink>
+            <NavLink to='/profile' style={({isActive}) => {
+                return {color: isActive ? "red" : "black"}
+            }}>Profile</NavLink>
+            <NavLink to='/messages' style={({isActive}) => {
+                return {color: isActive ? "red" : "black"}
+            }}>Messages</NavLink>
+            <NavLink to='/news' style={({isActive}) => {
+                return {color: isActive ? "red" : "black"}
+            }}>News</NavLink>
         </StyleNavigation>
     )
 }
@@ -15,7 +21,8 @@ export const Navigation: FC = () => {
 const StyleNavigation = styled.nav`
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 150px;
+  padding: 0 15px 0;
   background-color: #d2f3f3;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 110px);
 `

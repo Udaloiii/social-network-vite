@@ -10,6 +10,6 @@ export const Footer:FC = () => {
 }
 
 const StyleFooter = styled.footer`
-  height: 60px;
+  height: 50px;
   background-color: #6f9d99;
 `

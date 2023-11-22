@@ -9,8 +9,8 @@ export const PageError = () => {
     )
 }
 const StyleErrorImg = styled.img`
-  width: calc(100vw - 200px);
-  height: calc(100vh - 120px);
+  width: calc(100vw - 150px);
+  height: calc(100vh - 110px);
   object-fit: cover;
   pointer-events: none;
 `

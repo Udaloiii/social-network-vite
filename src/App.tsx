@@ -16,7 +16,8 @@ function App() {
             <FlexWrapper justify={"space-between"}>
                 <Navigation/>
                 <Routes>
-                    <Route path={'profile'} element={<Profile/>}/>
+                    <Route path={'/'}  element={<Profile/>}/>
+                    <Route path={'profile'}  element={<Profile/>}/>
                     <Route path={'messages'} element={<Messages/>}/>
                     <Route path={'news'} element={<News/>}/>
                     <Route path={'/*'} element={<PageError/>}/>
