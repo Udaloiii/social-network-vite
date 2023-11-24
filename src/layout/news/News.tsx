@@ -10,13 +10,14 @@ export const News: FC = () => {
     useEffect(() => {
         newsApi.getNews()
             .then(res => {
-                const filteredNews = res.data.articles.filter((article: ArticlesType) => {
-                    // Регулярное выражение для проверки наличия русских символов
-                    const russianRegex = /[а-яА-ЯЁё]/;
-                    return russianRegex.test(article.description);
-                });
+                // const filteredNews = res.data.articles.filter((article: ArticlesType) => {
+                //     // Регулярное выражение для проверки наличия русских символов
+                //     const russianRegex = /[а-яА-ЯЁё]/;
+                //     return russianRegex.test(article.description);
+                // });
                 console.log(res.data.articles)
-                setNews(filteredNews);
+                // setNews(filteredNews);
+                setNews(res.data.articles);
             })
     }, [])
     return (
