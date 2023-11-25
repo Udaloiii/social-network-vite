@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 type FlexWrapperPropsType = {
-    direction?: string
-    justify?: string
-    align?: string
+    direction?: "row" | "row-reverse" | "column" | "column-reverse"
+    justify?: "start" | "center" |"space-between" | "space-around" | "space-evenly"
+    align?: "stretch" | "center" | "start" | "end"
     gap?: string
-    wrap?: string
+    wrap?: "nowrap" | "wrap" | "wrap-reverse" | string
 }
 export const FlexWrapper = styled.div<FlexWrapperPropsType>`
   display: flex;
