@@ -1,23 +1,20 @@
-import {ChangeEvent, FC, useState} from "react";
+import {ChangeEvent, FC} from "react";
 import styled from "styled-components";
 
 type TextFieldType = {
-    type: string
-    placeholder: string
+    value: string
+    type?: "text" | "password"
+    placeholder?: string
     name?: string
+    as?: string
     onChange?: (value: string) => void
 }
-export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange}: TextFieldType) => {
-    const [value, setValue] = useState("")
+export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange, as, value}: TextFieldType) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChange?.(e.currentTarget.value)
 
-    const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value)
-        if (onChange) {
-            onChange(value)
-        }
-    }
     return (
-        <StyleTextfield type={type} placeholder={placeholder} name={name} onChange={handlerChange} value={value}/>
+        <StyleTextfield type={type} placeholder={placeholder} name={name} onChange={handleChange} value={value}
+                        as={as}/>
     )
 }
 
@@ -27,9 +24,10 @@ const StyleTextfield = styled.input`
   transition: .3s;
   outline: none;
   border-radius: 4px;
-  padding: 6px 12px;
+  padding: 10px 12px;
   caret-color: whitesmoke;
   color: whitesmoke;
+  max-width: 350px;
 
   &:focus {
     transform: scale(1.05);
