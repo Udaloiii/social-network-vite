@@ -7,7 +7,6 @@ type IconType = {
     viewBox?: string
     colorLike? : string
     addLike?: () => void
-    postId: number
 }
 export const Icon = ({iconId, width, height, viewBox, colorLike, addLike}: IconType) => {
     return (

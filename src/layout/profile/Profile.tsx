@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import {FC} from "react";
-import {FlexWrapper} from "../../components/flexWrapper/FlexWrapper";
-import {UserInfo} from "./userInfo/UserInfo";
-import { Posts } from "./posts/Posts";
+import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
+import {UserInfo} from "@/layout/profile/userInfo/UserInfo";
+import {Posts} from "@/layout/profile/posts/Posts";
+
 
 
 
