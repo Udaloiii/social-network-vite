@@ -8,6 +8,9 @@ export const Navigation: FC = () => {
             <NavLink to='/profile' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
             }}>Profile</NavLink>
+            <NavLink to='/users' style={({isActive}) => {
+                return {color: isActive ? "red" : "black"}
+            }}>Friends</NavLink>
             <NavLink to='/messages' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
             }}>Messages</NavLink>
