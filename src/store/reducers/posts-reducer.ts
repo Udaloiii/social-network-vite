@@ -29,7 +29,7 @@ const initialState: PostType[] = [
 // Type ACTION
 type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof addLikeAC>
 
-export const postsReducer = (state = initialState, action: ActionType) => {
+export const postsReducer = (state = initialState, action: ActionType): PostType[] => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostType = {
