@@ -21,7 +21,11 @@ const instance = axios.create({
 })
 
 export const usersApi = {
-    getUser() {
-        return instance.get('users')
+    getUser(count: number) {
+        return instance.get('users', {
+            params: {
+                count: count,
+            }
+        })
     }
 }
