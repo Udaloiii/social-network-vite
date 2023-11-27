@@ -1,20 +1,25 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 import styled from "styled-components";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {usersApi, UserType} from "@/api/users-api";
 import {User} from "@/layout/users/user/User";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "@/store/store";
+import {setUsersAC} from "@/store/reducers/users-reducer";
 
 
-export const Users = () => {
-    const [users, setUsers] = useState<null | UserType[]>(null)
+export const Users:FC = () => {
+    const users = useSelector<AppStateType, UserType[]>(state => state.users)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        usersApi.getUser()
+        !users.length && usersApi.getUser(25)
             .then(res => {
                 console.log(res.data)
-                setUsers(res.data.items)
+                dispatch(setUsersAC((res.data.items)))
             })
-    }, []);
+    }, [users, dispatch]);
+
     return (
         <StyleUsers>
             <FlexWrapper direction={"column"} gap={"30px"}>
