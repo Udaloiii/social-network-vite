@@ -29,6 +29,7 @@ const StyleImg = styled.img`
   margin-left: -20px;
   height: 50px;
   border-radius: 50%;
+  user-select: none;
 `
 
 const IconWrapper = styled.div`
