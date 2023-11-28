@@ -12,6 +12,11 @@ export type UserType = {
     followed: boolean
 }
 
+type UserResponseType = {
+    items: UserType[]
+    totalCount: number
+    error: null | string
+}
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -21,11 +26,7 @@ const instance = axios.create({
 })
 
 export const usersApi = {
-    getUser(count: number) {
-        return instance.get('users', {
-            params: {
-                count: count,
-            }
-        })
+    getUser(usersCount: number, currentPage: number) {
+        return instance.get<UserResponseType>(`users/?count=${usersCount}&page=${currentPage}`)
     }
 }
