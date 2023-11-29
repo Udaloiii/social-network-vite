@@ -71,16 +71,20 @@ export const Users: FC = () => {
             <br/>
             <ButtonOperation onClick={onPortionNumberMinusClick}
                              disabled={portionNumber < 2}>prev</ButtonOperation>
-            {arrOfPages.filter(el => el >= leftLimitPage && el <= rightLimitPage).map((el, index) => <StyleButton
-                key={index} isActive={el === currentPage}
-                onClick={() => onCurrentPageClick(el)}>{el}</StyleButton>)}
+            <FlexWrapper gap={"10px"}>
+                {arrOfPages.filter(el => el >= leftLimitPage && el <= rightLimitPage || el === pageCount).map((el, index) =>
+                <StyleButton
+                    key={index} isActive={el === currentPage}
+                    onClick={() => onCurrentPageClick(el)}>{el}</StyleButton>)
+                }
+            </FlexWrapper>
             <ButtonOperation onClick={onPortionNumberPlusClick}
                              disabled={portionNumber > pageCount / 10}>next</ButtonOperation>
             <p>Page count - {Math.ceil(pageCount ? pageCount : 0)}</p>
             <hr/>
             <br/>
             <FlexWrapper direction={"column"} gap={"30px"}>
-                {users?.map(el => <User key={el.id} name={el.name} followed={el.followed}/>
+                {users?.map(el => <User key={el.id} id={el.id} name={el.name} followed={el.followed}/>
                 )}
             </FlexWrapper>
         </StyleUsers>
@@ -91,6 +95,23 @@ const StyleUsers = styled.section`
   background-color: #c9ffeb;
   flex-grow: 1;
   padding: 15px;
+
+  ${FlexWrapper} {
+    button {
+      &:last-child {
+        position: relative;
+
+        &::before {
+          position: absolute;
+          content: "...";
+          right: 40px;
+          width: 20px;
+        }
+
+        margin-left: 20px;
+      }
+    }
+  }
 `
 
 const StyleSelect = styled.select`
