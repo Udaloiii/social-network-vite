@@ -8,7 +8,7 @@ export const Loader = () => {
     )
 }
 const LoadWrapper = styled.div`
-  width: 100vw;
+  width: calc(100vw - 150px);
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.85);
   display: flex;
