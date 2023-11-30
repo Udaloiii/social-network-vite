@@ -9,6 +9,7 @@ export type MessagesType = {
 }
 export const messagesApi = {
     getMessages: () => {
-        return axios.get<MessagesType[]>("https://jsonplaceholder.typicode.com/comments")
+        // return axios.get<MessagesType[]>(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+        return axios.get<MessagesType[]>(`https://jsonplaceholder.typicode.com/comments`)
     }
 }
