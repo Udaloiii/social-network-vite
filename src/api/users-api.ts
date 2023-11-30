@@ -12,7 +12,7 @@ export type UserType = {
     followed: boolean
 }
 
-type UserResponseType = {
+export type UserResponseType = {
     items: UserType[]
     totalCount: number
     error: null | string
