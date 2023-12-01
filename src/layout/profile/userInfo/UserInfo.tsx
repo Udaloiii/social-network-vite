@@ -1,4 +1,4 @@
-import { FlexWrapper } from "../../../components/flexWrapper/FlexWrapper"
+import { FlexWrapper } from "@/components/flexWrapper/FlexWrapper"
 
 
 export const UserInfo = () => {

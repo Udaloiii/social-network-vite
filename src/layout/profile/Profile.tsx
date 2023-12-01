@@ -15,7 +15,6 @@ export const Profile: FC = () => {
                     src={"https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259"}/>
                 <UserInfo/>
             </FlexWrapper>
-
             <Posts/>
         </StyleProfile>
     )
