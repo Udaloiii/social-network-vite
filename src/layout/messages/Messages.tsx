@@ -5,6 +5,7 @@ import {Loader} from "@/components/loader/Loader";
 import {messagesApi, MessagesType} from "@/api/messages-api";
 import {Pagination} from "@/components/pagination/Pagination";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
+import {Message} from "@/layout/messages/message/proba/Message";
 
 
 export const Messages: FC = () => {
@@ -38,12 +39,13 @@ export const Messages: FC = () => {
             <CustomSelect title={"сообщений"} value={pageSize} options={[10, 25, 50]} changePageSize={setPageSizeHandler}/>
                 <FlexWrapper direction={"column"} gap={"20px"}>
                     {currentTableData?.map(el => {
-                        return <StyleBlock key={el.id}>
-                            <span>{el.id}.</span>
-                            <span>{el.email}</span>
-                            <span>{el.name}</span>
-                            <span>{el.body}</span>
-                        </StyleBlock>
+                        // return <StyleBlock key={el.id}>
+                        //     <span>{el.id}.</span>
+                        //     {/*<span>{el.email}</span>*/}
+                        //     <span>{el.name}</span>
+                        //     <span>{el.body}</span>
+                        // </StyleBlock>
+                        return <Message key={el.id} userId={el.id} userName={el.name} text={el.body}/>
                     })}
                 </FlexWrapper>
                 <PaginationWrapper>
