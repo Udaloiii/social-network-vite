@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export type MessagesType = {
-    postId: number
+    postId?: number
     id: number
     name: string
-    email: string
+    email?: string
     body: string
 }
 export const messagesApi = {
