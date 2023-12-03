@@ -22,7 +22,7 @@ export const Posts: FC = () => {
         <StylePosts>
             <FlexWrapper direction={"column"} gap={"20px"}>
                 <h4>Add post</h4>
-                <AddItemForm addItem={addNewPostHandler}/>
+                <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder = {"create you post"} buttonTitle={"add post"}/>
                 {posts.map((el, index) => {
                     return <Post key={index} id={el.id} icon={el.icon} post={el.text} like={el.like}
                                  addLike={addLike}/>

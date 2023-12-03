@@ -35,7 +35,7 @@ export const MessagesWithBlock: FC = () => {
             messagesApi.getMessages()
                 .then(res => {
                     dispatch(setMessagesAC(res.data))
-                    console.log(res.data.length)
+                    console.log(`${res.data.length} сообщений`)
                 })
         }
     }, [messages, dispatch]);
