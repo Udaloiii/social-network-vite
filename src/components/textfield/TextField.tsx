@@ -14,7 +14,7 @@ export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange,
 
     return (
         <StyleTextfield type={type} placeholder={placeholder} name={name} onChange={handleChange} value={value}
-                        as={as}/>
+                        as={as ? as : "input"}/>
     )
 }
 
@@ -28,6 +28,7 @@ const StyleTextfield = styled.input`
   caret-color: whitesmoke;
   color: whitesmoke;
   max-width: 350px;
+  resize: none;
 
   &:focus {
     transform: scale(1.05);

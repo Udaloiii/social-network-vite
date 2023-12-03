@@ -5,8 +5,16 @@ import {FC, useState} from "react";
 
 type AddItemFormPropsType = {
     addItem?: (text: string) => void
+    as?: string
+    placeholder?: string
+    buttonTitle?: string
 }
-export const AddItemForm: FC<AddItemFormPropsType> = ({addItem}: AddItemFormPropsType) => {
+export const AddItemForm: FC<AddItemFormPropsType> = ({
+                                                          addItem,
+                                                          as,
+                                                          placeholder,
+                                                          buttonTitle
+                                                      }: AddItemFormPropsType) => {
     const [value, setValue] = useState("")
 
     const addItemHandler = () => {
@@ -18,8 +26,8 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({addItem}: AddItemFormProp
 
     return (
         <FlexWrapper direction={"column"} gap={"30px"} justify={"space-between"}>
-            <TextField type={"text"} placeholder={"create you post"} as={"textarea"} value={value} onChange={setValue}/>
-            <Button text={"add post"} addItem={addItemHandler}/>
+            <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue}/>
+            <Button text={buttonTitle} addItem={addItemHandler}/>
         </FlexWrapper>
     )
 }
