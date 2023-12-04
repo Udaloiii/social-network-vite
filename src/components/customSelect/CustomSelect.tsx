@@ -32,7 +32,7 @@ const SelectWrapper = styled.div`
   gap: 30px;
 `
 const StyleTitle = styled.span`
-  font-family: "Dialog", sans-serif;
+  font-family: "Calibri", sans-serif;
   align-self: flex-end;
 `
 

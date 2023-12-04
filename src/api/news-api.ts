@@ -18,7 +18,6 @@ type DataType = {
 }
 export const newsApi = {
     getNews: () => {
-        // return axios.get<DataType>("https://newsapi.org/v2/everything?q=all&language=ru&pageSize=10&sortBy=publishedAt&apiKey=fa43ff6276f44c29aed1a8510204d829")
         return axios.get<DataType>("https://newsapi.org/v2/everything?q=all&language=ru&sortBy=publishedAt&apiKey=fa43ff6276f44c29aed1a8510204d829")
     }
 }
