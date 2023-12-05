@@ -3,9 +3,10 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
 import {MessagesType} from "@/api/messages-api";
-import {FC} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
 import {addMessageAC} from "@/store/reducers/messages-reducer";
+import {getTime} from "@/utils/getTime";
 
 
 export const Message: FC = () => {
@@ -13,31 +14,45 @@ export const Message: FC = () => {
     const dispatch = useDispatch()
     const params = useParams()
     const id = params.id ? +params.id : 1
-    const filterMessage = messages.filter(el => el.id === id)
     console.log(params.id)
 
+    const [time, setTime] = useState(new Date()) // для времени сообщения
+
+    const filterMessage = useMemo(() => {
+        console.log("пересчет кол-ва сообщений")
+        return messages.filter(el => el.id === id)
+    }, [messages, id])
+
     const addMessageHandler = (text: string) => {
-        dispatch(addMessageAC(id, text))
+        dispatch(addMessageAC(id, text, getTime(time)))
     }
+
+    useEffect(() => {
+        setTime(new Date())
+    }, [messages]);
 
     return (
         <StyleContainer>
-            <StyleMessageWrapper>
-                <>
+            <>
+                <StyleMessageWrapper>
                     {filterMessage.map(el => {
-                        return <StyleMessage key={el.id} >
+                        const imageCondition = el.name === "Username" ? "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259" : "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?w=1480&t=st=1701451763~exp=1701452363~hmac=1abea2b533d7a55c075607f01afb47367a4033e84167adde1b38a76694577178"
+                        return <StyleMessage key={el.id} name={el.name}>
                             <img
-                                src={"https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?w=1480&t=st=1701451763~exp=1701452363~hmac=1abea2b533d7a55c075607f01afb47367a4033e84167adde1b38a76694577178"}
+                                src={imageCondition}
                                 alt=""/>
                             <MessageBlock>
                                 <StyleUserName>{el.name}</StyleUserName>
-                                <StyleText>{el.body}</StyleText>
+                                <MessageTimeWrap>
+                                    <StyleText>{el.body}</StyleText>
+                                    <MessageTime>{el.messageTime}</MessageTime>
+                                </MessageTimeWrap>
                             </MessageBlock>
                         </StyleMessage>
                     })
                     }
-                </>
-            </StyleMessageWrapper>
+                </StyleMessageWrapper>
+            </>
             <FormWrapper>
                 <AddItemForm addItem={addMessageHandler} placeholder={"write you message"}
                              buttonTitle={"send message"}
@@ -52,14 +67,24 @@ const StyleContainer = styled.div`
   flex-grow: 1;
   //flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  //flex-direction: column;
   background-color: cornflowerblue;
 `
 const StyleMessageWrapper = styled.div`
+  width: 80%;
   display: flex;
-  justify-content: center;
-  //align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  //border: 1px solid greenyellow;
 
+  &:first-child {
+    padding-top: 20px;
+  }
+
+  &:last-child {
+    margin-bottom: 170px;
+  }
 
   img {
     width: 65px;
@@ -95,7 +120,8 @@ const StyleText = styled.div`
   font-family: "Dialog", sans-serif;
   color: #2c2c2c;
   align-self: flex-end;
-  margin-top: 15px;
+  margin-top: 10px;
+  font-size: 0.8rem;
 `
 const StyleUserName = styled.span`
   font-family: "Calibri", sans-serif;
@@ -103,10 +129,20 @@ const StyleUserName = styled.span`
   text-transform: capitalize;
   font-size: 1.2rem;
 `
-const StyleMessage = styled.div`
+const StyleMessage = styled.div<{ name: string }>`
   display: flex;
+  justify-content: ${props => props.name === "Username" ? "flex-end" : "flex-start"};
   align-items: flex-end;
-  gap: 20px;
+  gap: 10px;
+
+  &:last-child {
+    padding-bottom: 170px;
+  }
+
+  img {
+    user-select: none;
+    object-fit: cover;
+  }
 `
 
 const FormWrapper = styled.div`
@@ -115,17 +151,29 @@ const FormWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   width: 300px;
-  //background-color: greenyellow;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   textarea {
-    width: 250px;
-    height: 50px;
+    width: 350px;
+    min-height: 50px;
   }
 
   button {
     align-self: center;
   }
+`
+
+const MessageTime = styled.div`
+  //width: max-content;
+  white-space: nowrap;
+  font-family: "Roboto Light", sans-serif;
+  font-size: 0.7rem;
+  align-self: flex-end;
+`
+
+const MessageTimeWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
