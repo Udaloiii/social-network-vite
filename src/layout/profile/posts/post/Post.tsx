@@ -3,21 +3,23 @@ import styled from "styled-components";
 import {Icon} from "@/components/icon/Icon";
 
 
-
 type PostType = {
     id: number
     post: string
     icon: string
     like?: boolean
     addLike: (id: number, newValue: boolean) => void
+    postTime?: string
+    postDate?: string
 }
-export const Post: FC<PostType> = ({id, post, icon, like, addLike}: PostType) => {
+export const Post: FC<PostType> = ({id, post, icon, like, addLike, postTime, postDate}: PostType) => {
     const colorLike = like ? "red" : "grey"
     const addLikeHandler = () => addLike(id, !like)
     return (
         <StylePost>
             <StyleImg src={icon} alt=""/>
             <span>{post}</span>
+            <PostTime>{postDate} {postTime}</PostTime>
             <Icon iconId={"like"} height={"14"} width={"14"} viewBox={"0 0 48 48"} colorLike={colorLike}
                   addLike={addLikeHandler}/>
         </StylePost>
@@ -54,4 +56,8 @@ const StyleImg = styled.img`
   height: 35px;
   border-radius: 50%;
   user-select: none;
+`
+
+const PostTime = styled.span`
+  font-size: 0.5rem;
 `
