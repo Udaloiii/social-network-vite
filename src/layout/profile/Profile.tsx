@@ -25,7 +25,7 @@ const StyleProfile = styled.section`
   flex-grow: 1;
 
   ${FlexWrapper} {
-    margin: 10px;
+    padding: 10px;
   }
 `
 

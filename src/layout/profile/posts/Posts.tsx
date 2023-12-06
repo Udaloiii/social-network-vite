@@ -24,18 +24,16 @@ export const Posts: FC = () => {
 
     useEffect(() => {
         setTime(new Date())
-        console.log("useEffect в Message")
     }, [posts]);
     return (
         <StylePosts>
             <FlexWrapper direction={"column"} gap={"20px"}>
-                <h4>Add post</h4>
                 <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder={"create you post"}
                              buttonTitle={"add post"}/>
                 {posts.map((el, index) => {
                     return <Post key={index} id={el.id} icon={el.icon} post={el.text} like={el.like}
                                  postTime={el.postTime}
-                                 postDate = {el.postDate}
+                                 postDate={el.postDate}
                                  addLike={addLike}/>
                 })}
             </FlexWrapper>

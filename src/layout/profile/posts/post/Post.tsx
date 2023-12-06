@@ -33,7 +33,7 @@ const StylePost = styled.div`
   transition: .2s;
 
   span {
-    max-width: 1300px;
+    //max-width: 1300px;
   }
 
   svg {
