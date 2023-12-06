@@ -6,7 +6,6 @@ export type MessagesType = {
     name: string
     email?: string
     body: string
-    messageTime?: string
 }
 export const messagesApi = {
     getMessages: () => {
