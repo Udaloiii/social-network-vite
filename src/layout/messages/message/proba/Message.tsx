@@ -2,30 +2,30 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
-import {MessagesType} from "@/api/messages-api";
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, memo, useCallback, useEffect, useState} from "react";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
-import {addMessageAC} from "@/store/reducers/messages-reducer";
+import {addMessageAC, MessageStateType} from "@/store/reducers/messages-reducer";
 import {getTime} from "@/utils/getTime";
 
 
-export const Message: FC = () => {
-    const messages = useSelector<AppStateType, MessagesType[]>(state => state.messages)
+export const Message: FC = memo(() => {
+    const messages = useSelector<AppStateType, MessageStateType[]>(state => state.messages)
     const dispatch = useDispatch()
     const params = useParams()
     const id = params.id ? +params.id : 1
-    console.log(params.id)
 
     const [time, setTime] = useState(new Date()) // для времени сообщения
 
-    const filterMessage = useMemo(() => {
-        console.log("пересчет кол-ва сообщений")
-        return messages.filter(el => el.id === id)
-    }, [messages, id])
+    const filterMessage = messages.filter(el => el.id === id)
 
-    const addMessageHandler = (text: string) => {
-        dispatch(addMessageAC(id, text, getTime(time)))
-    }
+
+    let messageId = filterMessage[filterMessage.length - 1].messageId
+
+
+    const addMessageHandler = useCallback((text: string) => {
+        ++messageId
+        dispatch(addMessageAC(id, messageId, text, getTime(time)))
+    }, [messageId, dispatch])
 
     useEffect(() => {
         setTime(new Date())
@@ -37,7 +37,8 @@ export const Message: FC = () => {
                 <StyleMessageWrapper>
                     {filterMessage.map(el => {
                         const imageCondition = el.name === "Username" ? "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259" : "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?w=1480&t=st=1701451763~exp=1701452363~hmac=1abea2b533d7a55c075607f01afb47367a4033e84167adde1b38a76694577178"
-                        return <StyleMessage key={el.id} name={el.name}>
+
+                        return <StyleMessage key={el.messageId} name={el.name}>
                             <img
                                 src={imageCondition}
                                 alt=""/>
@@ -60,7 +61,7 @@ export const Message: FC = () => {
             </FormWrapper>
         </StyleContainer>
     )
-}
+})
 
 const StyleContainer = styled.div`
   position: relative;
