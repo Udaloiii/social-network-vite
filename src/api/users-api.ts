@@ -11,8 +11,28 @@ export type UserType = {
     status: null | string
     followed: boolean
 }
+export type ProfileResponseType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
+}
 
-export type UserResponseType = {
+export type UsersResponseType = {
     items: UserType[]
     totalCount: number
     error: null | string
@@ -26,7 +46,10 @@ const instance = axios.create({
 })
 
 export const usersApi = {
-    getUser(usersCount: number, currentPage: number) {
-        return instance.get<UserResponseType>(`users/?count=${usersCount}&page=${currentPage}`)
+    getUsers(usersCount: number, currentPage: number) {
+        return instance.get<UsersResponseType>(`users/?count=${usersCount}&page=${currentPage}`)
+    },
+    getMyProfile(id: number) {
+        return instance.get<ProfileResponseType>(`profile/${id}`)
     }
 }
