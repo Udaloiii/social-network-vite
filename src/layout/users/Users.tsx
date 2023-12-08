@@ -1,22 +1,19 @@
 import {FC, useEffect, useState} from "react";
 import styled from "styled-components";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
-import {usersApi, UserType} from "@/api/users-api";
+import {usersApi} from "@/api/users-api";
 import {User} from "@/layout/users/user/User";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
-import {changePageSizeAC, setUsersAC, setUsersCountAC} from "@/store/reducers/users-reducer";
+import {changePageSizeAC, setUsersAC, setUsersCountAC, UserItemType} from "@/store/reducers/users-reducer";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Pagination} from "@/components/pagination/Pagination";
 import {Loader} from "@/components/loader/Loader";
 
 
 export const Users: FC = () => {
-    const users = useSelector<AppStateType, Array<UserType & {
-        posts: string[],
-        icon: string
-    }>>(state => state.users.items)
-    const pageSize = useSelector<AppStateType, number>(state => state.users.pageSize || 10)
+    const users = useSelector<AppStateType, UserItemType[]>(state => state.users.items)
+    const pageSize = useSelector<AppStateType, number>(state => state.users.pageSize)
 
     const usersCount = useSelector<AppStateType, number>(state => state.users.totalCount)
     const dispatch = useDispatch()
@@ -37,15 +34,14 @@ export const Users: FC = () => {
     }
 
     useEffect(() => {
-        // console.log(users?.length)
-        usersApi.getUser(pageSize, currentPage)
+        usersApi.getUsers(pageSize, currentPage)
             .then(res => {
-                console.log(res.data)
+                console.log("USE-EFFECT В USERS.TSX")
                 setTotalCount(res.data.totalCount)
                 dispatch(setUsersAC((res.data.items)))
                 dispatch(setUsersCountAC((res.data.totalCount)))
             })
-    }, [users?.length, pageSize, usersCount, currentPage, dispatch]);
+    }, [pageSize, usersCount, currentPage, dispatch]);
 
 
     return (
