@@ -3,38 +3,44 @@ import {FC, useEffect, useState} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
 import {Post} from "@/layout/profile/posts/post/Post";
-import {addLikeAC, addPostAC, PostType} from "@/store/reducers/posts-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "@/store/store";
+// import {addLikeAC, addPostAC, PostType} from "@/store/reducers/posts-reducer";
+import {useDispatch} from "react-redux";
 import {getTime} from "@/utils/getTime";
+import { addPostAC, PostType} from "@/store/reducers/users-reducer";
+import {addLikeAC} from "@/store/reducers/profile-reducer";
 
-
-export const Posts: FC = () => {
-    const posts = useSelector<AppStateType, PostType[]>(state => state.posts)
+type PostsPropsType = {
+    userId: number
+    posts: PostType[]
+}
+export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
     const dispatch = useDispatch()
+
 
     const [time, setTime] = useState(new Date()) // для времени сообщения
 
     const addNewPostHandler = (text: string) => {
-        dispatch(addPostAC(text, getTime(time)))
+        dispatch(addPostAC(userId, text, getTime(time)))
     }
-    const addLike = (id: number, newValue: boolean) => {
-        dispatch(addLikeAC(id, newValue))
+    const addLike = (postId: number, newValue: boolean) => {
+        dispatch(addLikeAC(postId, newValue))
     }
 
     useEffect(() => {
         setTime(new Date())
-    }, [posts]);
+    }, [posts])
+
     return (
         <StylePosts>
             <FlexWrapper direction={"column"} gap={"20px"}>
                 <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder={"create you post"}
                              buttonTitle={"add post"}/>
-                {posts.map((el, index) => {
+                {posts?.map((el, index) => {
                     return <Post key={index} id={el.id} icon={el.icon} post={el.text} like={el.like}
                                  postTime={el.postTime}
                                  postDate={el.postDate}
-                                 addLike={addLike}/>
+                                 addLike={addLike}
+                    />
                 })}
             </FlexWrapper>
         </StylePosts>
@@ -65,3 +71,4 @@ const StylePosts = styled.div`
     }
   }
 `
+

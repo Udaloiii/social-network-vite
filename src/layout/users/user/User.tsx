@@ -8,9 +8,9 @@ type UserPropsType = {
     name: string
     followed?: boolean
     userId?: number
-    icon?:string
+    icon?: string
 }
-export const User: FC<UserPropsType> = ({name, followed, userId,icon}: UserPropsType) => {
+export const User: FC<UserPropsType> = ({name, followed, userId, icon}: UserPropsType) => {
 
     const condition = followed ?
         <IconWrapper title={"unfollow"}><Icon iconId={"unfollow"} width={"25px"} height={"25px"}
@@ -26,8 +26,8 @@ export const User: FC<UserPropsType> = ({name, followed, userId,icon}: UserProps
                 {condition}
                 <StyleLink to={`/users/${userId}`}>
                     <StyleImg src={icon}/>
-                    {userId}
-                    {name}
+                    <StyleId>{userId}</StyleId>
+                    <StyleName>{name}</StyleName>
                 </StyleLink>
             </FlexWrapper>
         </StyleUser>
@@ -47,6 +47,14 @@ const StyleImg = styled.img`
     transform: scale(1.05);
     transition: .2s;
   }
+`
+const StyleId = styled.span`
+  font-family: Algerian, sans-serif;
+  color: royalblue;
+`
+
+const StyleName = styled.span`
+  text-transform: capitalize;
 `
 
 const IconWrapper = styled.div`
@@ -69,7 +77,7 @@ const IconWrapper = styled.div`
 `
 
 const StyleLink = styled(NavLink)`
-display: flex;
+  display: flex;
   gap: 20px;
   align-items: flex-end;
 `

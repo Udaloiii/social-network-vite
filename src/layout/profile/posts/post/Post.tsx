@@ -8,13 +8,13 @@ type PostType = {
     post: string
     icon: string
     like?: boolean
-    addLike: (id: number, newValue: boolean) => void
+    addLike?: (id: number, newValue: boolean) => void
     postTime?: string
     postDate?: string
 }
 export const Post: FC<PostType> = ({id, post, icon, like, addLike, postTime, postDate}: PostType) => {
     const colorLike = like ? "red" : "grey"
-    const addLikeHandler = () => addLike(id, !like)
+    const addLikeHandler = () => addLike?.(id, !like)
     return (
         <StylePost>
             <StyleImg src={icon} alt=""/>
