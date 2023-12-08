@@ -38,6 +38,7 @@ export const MessagesWithBlock: FC = () => {
                     // console.log(`${res.data.length} сообщений`)
                 })
         }
+        console.log("USE-EFFECT В MESSAGES")
     }, [messages, dispatch]);
 
     return (
