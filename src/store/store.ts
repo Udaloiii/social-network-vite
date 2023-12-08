@@ -14,5 +14,6 @@ export const store = createStore(mainReducer)
 
 export type AppStateType = ReturnType<typeof mainReducer>
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 window.store = store
