@@ -7,16 +7,20 @@ export const Navigation: FC = () => {
         <StyleNavigation>
             <NavLink to='/profile' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
-            }}>Profile</NavLink>
+            }}>Profile
+            </NavLink>
             <NavLink to='/users' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
-            }}>Friends</NavLink>
+            }}>Friends
+            </NavLink>
             <NavLink to='/messages' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
-            }}>Messages</NavLink>
+            }}>Messages
+            </NavLink>
             <NavLink to='/news' style={({isActive}) => {
                 return {color: isActive ? "red" : "black"}
-            }}>News</NavLink>
+            }}>News
+            </NavLink>
         </StyleNavigation>
     )
 }

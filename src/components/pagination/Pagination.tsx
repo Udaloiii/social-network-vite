@@ -85,7 +85,8 @@ const PaginationItem = styled.li<{ condition?: boolean, disabled?: boolean }>`
   background-color: ${props => props.condition && "royalblue"};
   color: ${props => props.condition && "whitesmoke"};
   transition: .2s;
-
+  user-select: none;
+  
   &:hover {
     background-color: ${props => !props.condition && "rgba(0, 0, 0, 0.08)"};
   }
