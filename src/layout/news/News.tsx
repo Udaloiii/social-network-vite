@@ -1,14 +1,18 @@
 import styled from "styled-components";
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {ArticlesType, newsApi} from "@/api/news-api";
 import {Pagination} from "@/components/pagination/Pagination";
-import {Loader} from "@/components/loader/Loader";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
+import {Loader1} from "@/components/loader/Loader1";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "@/store/store";
+import {setNewsAC} from "@/store/reducers/news-reducer";
 
 
 export const News: FC = () => {
-    const [news, setNews] = useState<null | ArticlesType[]>(null)
+    const news = useSelector<AppStateType, ArticlesType[]>(state => state.news)
+    const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [pageSize, setPageSize] = useState(10)
 
@@ -23,43 +27,53 @@ export const News: FC = () => {
         setPageSize(pageSize)
         setCurrentPage(1)
     }
-    useEffect(() => {
-        newsApi.getNews()
-            .then(res => {
-                // const filteredNews = res.data.articles.filter((article: ArticlesType) => {
-                //     // Регулярное выражение для проверки наличия русских символов
-                //     const russianRegex = /[а-яА-ЯЁё]/;
-                //     return russianRegex.test(article.description);
-                // });
-                console.log(res.data.articles)
-                // setNews(filteredNews);
-                setNews(res.data.articles);
-            })
-    }, [])
-    return (
-        news ? <StyleNews>
-                    <CustomSelect title={"новостей на странице"} options={[10, 25, 50]} value={pageSize}
-                                  changePageSize={setPageSizeHandler}/>
-                <FlexWrapper direction={"column"} gap={"30px"}>
-                    {currentTableData?.map((el, index) => {
-                        return <div key={index}>
-                            <FlexWrapper gap={"20px"}>
-                                <StyleImage src={el.urlToImage} alt=""/>
-                                <FlexWrapper direction={"column"} gap={"20px"}>
-                                    {el.description}
-                                    <StyleLink href={el.url} target={"_blank"}>подробнее</StyleLink>
-                                </FlexWrapper>
-                            </FlexWrapper>
 
-                        </div>
-                    })}
-                </FlexWrapper>
-                <PaginationWrapper>
-                    <Pagination totalCount={news.length} currentPage={currentPage} pageSize={pageSize}
-                                onPageChange={setCurrentPage} siblingCount={2}/>
-                </PaginationWrapper>
-            </StyleNews>
-            : <Loader/>
+    const isMounted = useRef(false);
+
+    useEffect(() => {
+        if (!isMounted.current && news.length) {
+            isMounted.current = true;
+        } else {
+            !news.length && newsApi.getNews()
+                .then(res => {
+                    // const filteredNews = res.data.articles.filter((article: ArticlesType) => {
+                    //     // Регулярное выражение для проверки наличия русских символов
+                    //     const russianRegex = /[а-яА-ЯЁё]/;
+                    //     return russianRegex.test(article.description);
+                    // });
+                    console.log("USE-EFFECT В NEWS")
+                    dispatch(setNewsAC(res.data.articles))
+                })
+        }
+    }, [dispatch, news.length])
+    return (
+        <StyleNews>
+            <CustomSelect title={"новостей на странице"} options={[10, 25, 50]} value={pageSize}
+                          changePageSize={setPageSizeHandler}/>
+            {news.length ? <>
+                    <FlexWrapper direction={"column"} gap={"30px"}>
+                        {currentTableData?.map((el, index) => {
+                            return <div key={index}>
+                                <FlexWrapper gap={"20px"}>
+                                    <StyleImage src={el.urlToImage} alt=""/>
+                                    <FlexWrapper direction={"column"} gap={"20px"}>
+                                        {el.description}
+                                        <StyleLink href={el.url} target={"_blank"}>подробнее</StyleLink>
+                                    </FlexWrapper>
+                                </FlexWrapper>
+
+                            </div>
+                        })}
+                    </FlexWrapper>
+                    <PaginationWrapper>
+                        <Pagination totalCount={news.length} currentPage={currentPage} pageSize={pageSize}
+                                    onPageChange={setCurrentPage} siblingCount={2}/>
+                    </PaginationWrapper>
+                </>
+                : <Loader1/>
+            }
+        </StyleNews>
+
     )
 }
 
@@ -74,10 +88,10 @@ const StyleNews = styled.section`
   }
 
   ${FlexWrapper} {
-    margin: 0 10px;
+    padding: 0 10px;
 
     &:nth-child(1) {
-      margin-top: 15px;
+      padding-top: 15px;
     }
   }
 `

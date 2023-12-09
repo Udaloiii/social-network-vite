@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {messagesApi, MessagesType} from "@/api/messages-api";
 import {Pagination} from "@/components/pagination/Pagination";
@@ -30,16 +30,19 @@ export const MessagesWithBlock: FC = () => {
         setCurrentPage(1)
     }
 
+    const isMounted = useRef(false) // для проверки, был ли вмонтирован компонент, чтобы не делать лишние запросы на сервак
     useEffect(() => {
-        if (!messages.length) {
-            messagesApi.getMessages()
+        if (!isMounted.current && messages.length) {
+            isMounted.current = true;
+        } else {
+            !messages.length && messagesApi.getMessages()
                 .then(res => {
                     dispatch(setMessagesAC(res.data))
                     // console.log(`${res.data.length} сообщений`)
                 })
+            console.log("USE-EFFECT В MESSAGES")
         }
-        console.log("USE-EFFECT В MESSAGES")
-    }, [messages, dispatch]);
+    }, [messages.length, dispatch]);
 
     return (
         <StyleMessages>
@@ -73,6 +76,7 @@ const StyleMessages = styled.section`
   background-color: #c9ffeb;
   flex-grow: 1;
   width: calc(100vw - 150px);
+  //padding: 20px;
   margin: 0 auto;
 
   &:last-child {
