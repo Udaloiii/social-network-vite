@@ -11,7 +11,7 @@ export type ArticlesType = {
     urlToImage: string
 }
 
-type DataType = {
+export type DataType = {
     articles: ArticlesType[]
     status: string
     totalResults: number
