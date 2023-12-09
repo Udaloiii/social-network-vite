@@ -47,17 +47,19 @@ export const Users: FC = () => {
     return (
         users ?
             <StyleUsers>
-                <CustomSelect title={"юзеров"} value={pageSize} options={[10, 25, 50]}
-                              changePageSize={setPageSizeHandler}/>
-                <FlexWrapper direction={"column"} gap={"30px"}>
-                    {users?.map(el => <User key={el.id} userId={el.id} name={el.name} followed={el.followed}
-                                            icon={el.icon}/>
-                    )}
-                </FlexWrapper>
-                <PaginationWrapper>
-                    <Pagination totalCount={totalCount} currentPage={currentPage} pageSize={pageSize}
-                                onPageChange={setCurrentPage} siblingCount={2}/>
-                </PaginationWrapper>
+                <UsersWrapper>
+                    <CustomSelect title={"юзеров"} value={pageSize} options={[10, 25, 50]}
+                                            changePageSize={setPageSizeHandler}/>
+                    <FlexWrapper direction={"column"} gap={"30px"}>
+                        {users?.map(el => <User key={el.id} userId={el.id} name={el.name} followed={el.followed}
+                                                icon={el.icon}/>
+                        )}
+                    </FlexWrapper>
+                    <PaginationWrapper>
+                        <Pagination totalCount={totalCount} currentPage={currentPage} pageSize={pageSize}
+                                    onPageChange={setCurrentPage} siblingCount={2}/>
+                    </PaginationWrapper>
+                </UsersWrapper>
             </StyleUsers>
             : <Loader/>
     )
@@ -65,7 +67,10 @@ export const Users: FC = () => {
 
 const StyleUsers = styled.section`
   background-color: #c9ffeb;
+  width: calc(100vw - 150px);
   flex-grow: 1;
+`
+const UsersWrapper = styled.section`
   padding: 15px;
 `
 const PaginationWrapper = styled.div`

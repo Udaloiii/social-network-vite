@@ -2,6 +2,7 @@ import {Button} from "../button/Button"
 import {FlexWrapper} from "../flexWrapper/FlexWrapper"
 import {TextField} from "../textfield/TextField"
 import {FC, useState} from "react";
+import styled from "styled-components";
 
 type AddItemFormPropsType = {
     addItem?: (text: string) => void
@@ -25,9 +26,15 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({
     }
 
     return (
-        <FlexWrapper direction={"column"} gap={"30px"} justify={"space-between"}>
+        <StyleAddForm><FlexWrapper direction={"column"} gap={"30px"} justify={"space-between"}>
             <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue}/>
             <Button text={buttonTitle} addItem={addItemHandler}/>
-        </FlexWrapper>
+        </FlexWrapper></StyleAddForm>
     )
 }
+
+const StyleAddForm = styled.div`
+  ${FlexWrapper} {
+    padding: 0;
+  }
+`

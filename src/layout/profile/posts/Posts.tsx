@@ -63,8 +63,12 @@ const StylePosts = styled.div`
 
   ${FlexWrapper} {
     width: max-content;
+    padding: 20px;
 
     ${FlexWrapper} {
+      textarea {
+        align-items: flex-start;
+      }
       button {
         align-self: center;
       }

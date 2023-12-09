@@ -46,10 +46,10 @@ export const Profile: FC = () => {
 const StyleProfile = styled.section`
   background-color: #c9ffeb;
   flex-grow: 1;
-  padding: 20px;
+  width: calc(100vw - 150px);
 
   ${FlexWrapper} {
-    padding-top: 20px;
+    padding: 20px;
   }
 `
 
