@@ -5,12 +5,11 @@ import {Posts} from "@/layout/profile/posts/Posts";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
-import {UserType} from "@/api/users-api";
+import {UserItemType} from "@/store/reducers/users-reducer";
 
 export const UserPage = () => {
-    type MainUserType = UserType & { posts: string[], icon: string }
     const params = useParams()
-    const users = useSelector<AppStateType, MainUserType[]>(state => state.users.items)
+    const users = useSelector<AppStateType, UserItemType[]>(state => state.users.items)
     const id = params.id ? +params.id : 1
     const user = users.filter(el => el.id === id)[0]
 
@@ -22,7 +21,7 @@ export const UserPage = () => {
                     src={user.icon}/>
                 <UserInfo user={user}/>
             </FlexWrapper>
-            <Posts/>
+            <Posts id={id}/>
         </StyleContainer>
     )
 }
