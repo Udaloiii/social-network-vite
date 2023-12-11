@@ -18,7 +18,7 @@ export const Post: FC<PostType> = ({id, post, icon, like, addLike, postTime, pos
     return (
         <StylePost>
             <StyleImg src={icon} alt=""/>
-            <span>{post}</span>
+            <StyleText>{post}</StyleText>
             <PostTime>{postDate} {postTime}</PostTime>
             <Icon iconId={"like"} height={"14"} width={"14"} viewBox={"0 0 48 48"} colorLike={colorLike}
                   addLike={addLikeHandler}/>
@@ -31,10 +31,6 @@ const StylePost = styled.div`
   gap: 20px;
   align-items: flex-end;
   transition: .2s;
-
-  span {
-    //max-width: 1300px;
-  }
 
   svg {
     cursor: pointer;
@@ -50,6 +46,12 @@ const StylePost = styled.div`
       transition: .2s;
     }
   }
+`
+const StyleText = styled.span`
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: break-word;
 `
 
 const StyleImg = styled.img`

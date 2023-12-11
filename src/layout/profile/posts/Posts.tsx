@@ -32,7 +32,7 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
 
     return (
         <StylePosts>
-            <FlexWrapper direction={"column"} gap={"20px"}>
+            <FlexWrapper direction={"column"} gap={"25px"}>
                 <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder={"create you post"}
                              buttonTitle={"add post"}/>
                 {posts?.map((el, index) => {
@@ -48,14 +48,11 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
 }
 
 const StylePosts = styled.div`
-  max-width: 1440px;
-  display: flex;
-  flex-wrap: wrap;
-  word-wrap: break-word;
+  //display: flex;
+  //flex-wrap: wrap;
+  //word-wrap: break-word;
 
   textarea {
-    resize: none;
-    min-width: 300px;
     height: 100px;
     font-size: 1rem;
     transform: none !important;
@@ -63,12 +60,8 @@ const StylePosts = styled.div`
 
   ${FlexWrapper} {
     width: max-content;
-    padding: 20px;
 
-    ${FlexWrapper} {
-      textarea {
-        align-items: flex-start;
-      }
+    & {
       button {
         align-self: center;
       }
