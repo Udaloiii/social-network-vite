@@ -28,6 +28,7 @@ const StyleTextfield = styled.input`
   caret-color: whitesmoke;
   color: whitesmoke;
   max-width: 350px;
+  //width: 325px;
   resize: none;
 
   &:focus {

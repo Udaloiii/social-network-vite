@@ -9,6 +9,7 @@ import {AppStateType} from "@/store/store";
 import {ProfileType, setProfileAC} from "@/store/reducers/profile-reducer";
 import {useParams} from "react-router-dom";
 import {UserItemType} from "@/store/reducers/users-reducer";
+import {Loader1} from "@/components/loader/Loader1";
 
 
 export const Profile: FC = () => {
@@ -32,13 +33,17 @@ export const Profile: FC = () => {
 
     return (
         <StyleProfile>
-            {profile && <FlexWrapper gap={"50px"}>
-                <StyleProfileImage
-                    src={image}
-                />
-                <UserInfo user={profile}/>
-            </FlexWrapper>}
-            <Posts userId={id} posts={posts}/>
+            {profile.fullName ?
+                <ProfileWrapper>
+                    <FlexWrapper gap={"50px"}>
+                        <StyleProfileImage
+                            src={image}
+                        />
+                        <UserInfo user={profile}/>
+                    </FlexWrapper>
+                    <Posts userId={id} posts={posts}/>
+                </ProfileWrapper>
+                : <Loader1/>}
         </StyleProfile>
     )
 }
@@ -46,13 +51,18 @@ export const Profile: FC = () => {
 const StyleProfile = styled.section`
   background-color: #c9ffeb;
   flex-grow: 1;
-  width: calc(100vw - 150px);
-
-  ${FlexWrapper} {
-    padding: 20px;
+  //width: calc(100vw - 150px);
+`
+const ProfileWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  padding: 20px;
+  
+  textarea {
+    width: 325px;
   }
 `
-
 const StyleProfileImage = styled.img`
   width: 325px;
   height: 290px;
