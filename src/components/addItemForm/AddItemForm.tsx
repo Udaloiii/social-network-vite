@@ -26,15 +26,14 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({
     }
 
     return (
-        <StyleAddForm><FlexWrapper direction={"column"} gap={"30px"} justify={"space-between"}>
-            <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue}/>
-            <Button text={buttonTitle} addItem={addItemHandler}/>
-        </FlexWrapper></StyleAddForm>
+        <StyleAddForm>
+            <FlexWrapper direction={"column"} gap={"30px"} justify={"start"} align={"start"}>
+                <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue}/>
+                <Button text={buttonTitle} addItem={addItemHandler}/>
+            </FlexWrapper>
+        </StyleAddForm>
     )
 }
 
 const StyleAddForm = styled.div`
-  ${FlexWrapper} {
-    padding: 0;
-  }
 `

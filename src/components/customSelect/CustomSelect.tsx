@@ -27,7 +27,6 @@ export const CustomSelect: FC<CustomSelectPropsType> = ({
     )
 }
 const SelectWrapper = styled.div`
-  margin: 20px;
   display: flex;
   gap: 30px;
 `
