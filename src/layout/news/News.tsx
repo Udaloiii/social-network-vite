@@ -51,6 +51,11 @@ export const News: FC = () => {
             <CustomSelect title={"новостей на странице"} options={[10, 25, 50]} value={pageSize}
                           changePageSize={setPageSizeHandler}/>
             {news.length ? <>
+                    <PaginationTopWrapper>
+                        <Pagination totalCount={news.length} currentPage={currentPage} pageSize={pageSize}
+                                    onPageChange={setCurrentPage}
+                                    siblingCount={2}/>
+                    </PaginationTopWrapper>
                     <FlexWrapper direction={"column"} gap={"30px"}>
                         {currentTableData?.map((el, index) => {
                             return <div key={index}>
@@ -65,10 +70,10 @@ export const News: FC = () => {
                             </div>
                         })}
                     </FlexWrapper>
-                    <PaginationWrapper>
+                    <PaginationBottomWrapper>
                         <Pagination totalCount={news.length} currentPage={currentPage} pageSize={pageSize}
                                     onPageChange={setCurrentPage} siblingCount={2}/>
-                    </PaginationWrapper>
+                    </PaginationBottomWrapper>
                 </>
                 : <Loader1/>
             }
@@ -79,21 +84,25 @@ export const News: FC = () => {
 
 const StyleNews = styled.section`
   position: relative;
-  background-color: #dbfff3;
+  background-color: #c9ffeb;
   flex-grow: 1;
-  width: calc(100vw - 150px);
+
+  padding: 20px;
+
 
   &:last-child {
-    padding-bottom: 70px;
+    padding-bottom: 100px;
   }
 
   ${FlexWrapper} {
-    padding: 0 10px;
+    padding-top: 20px;
+    max-width: calc(100vw - 230px);
 
     &:nth-child(1) {
-      padding-top: 15px;
+      padding-top: 50px;
     }
   }
+
 `
 
 const StyleImage = styled.img`
@@ -115,7 +124,13 @@ const StyleLink = styled.a`
   }
 `
 
-const PaginationWrapper = styled.div`
+const PaginationTopWrapper = styled.div`
+  margin-left: -20px;
+  padding-top: 20px;
+`
+
+const PaginationBottomWrapper = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
+  left: 0;
 `
