@@ -109,8 +109,7 @@ const StyleImage = styled.img`
   width: 225px;
   height: 150px;
   object-fit: cover;
-  border-radius: 4px;
-
+  border-radius: 5px;
 
 `
 const StyleLink = styled.a`
