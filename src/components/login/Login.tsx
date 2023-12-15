@@ -1,25 +1,57 @@
 import {FC} from "react";
 import styled from "styled-components";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
 
+// type FormValues = {
+//     email: string
+//     password: string
+//     rememberMe: boolean
+// }
+const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(3),
+    rememberMe: z.boolean().default(false),
+})
+type FormValues = z.infer<typeof loginSchema>
 export const Login: FC = () => {
+
+    const {register, handleSubmit, formState: {errors}} = useForm<FormValues>({
+        resolver: zodResolver(loginSchema),
+    })
+
+    const onSubmit = (data: FormValues) => {
+        console.log(data)
+    }
+
+    // const emailRegex =
+    //     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+
     return (
         <StyleLogin>
-            <form>
+            <StyleForm onSubmit={handleSubmit(onSubmit)}>
                 <UserBox>
-                    <StyleInput type="text" name="" required/>
+                    <StyleInput {...register('email')} required/>
                     <StyleLabel>Username</StyleLabel>
+                    <ErrorMessage>{errors.email?.message}</ErrorMessage>
                 </UserBox>
                 <UserBox>
-                    <StyleInput type="password" name="" required/>
+                    <StyleInput {...register('password')} type={"password"} required/>
                     <StyleLabel>Password</StyleLabel>
+                    <ErrorMessage>{errors.password?.message}</ErrorMessage>
                 </UserBox>
+                <CheckboxWrapper>
+                    <input type={"checkbox"} id={"rememberMe"}/>
+                    <label htmlFor={"rememberMe"}>remember me</label>
+                </CheckboxWrapper>
                 <center>
-                    <StyleLink href="#">
+                    <StyleButton type={"submit"}>
                         SEND
                         <span></span>
-                    </StyleLink>
+                    </StyleButton>
                 </center>
-            </form>
+            </StyleForm>
         </StyleLogin>
     )
 }
@@ -46,6 +78,11 @@ const StyleLogin = styled.div`
     }
   }
 `
+const StyleForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
 
 const UserBox = styled.div`
   position: relative;
@@ -58,7 +95,7 @@ const StyleInput = styled.input`
   color: #fff;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid royalblue;
   outline: none;
   background: transparent;
 
@@ -76,12 +113,12 @@ const StyleLabel = styled.label`
   left: 0;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: grey;
   pointer-events: none;
   transition: .5s;
 `
 
-const StyleLink = styled.a`
+const StyleButton = styled.button`
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -93,15 +130,18 @@ const StyleLink = styled.a`
   transition: .3s;
   margin-top: 40px;
   letter-spacing: 4px;
+  border: none;
+  outline: none;
+  background-color: transparent;
 
   &:hover {
     background: royalblue;
     color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 5px royalblue,
-    0 0 25px royalblue,
-    0 0 50px royalblue,
-    0 0 100px royalblue;
+    0 0 10px royalblue,
+    0 0 20px royalblue,
+    0 0 40px royalblue;
   }
 
   &:active {
@@ -120,7 +160,7 @@ const StyleLink = styled.a`
   span {
     position: absolute;
     display: block;
-    
+
     &:nth-child(1) {
       bottom: 2px;
       left: -100%;
@@ -130,6 +170,33 @@ const StyleLink = styled.a`
       animation: btn-anim1 2s linear infinite;
     }
   }
+`
 
-  
+const CheckboxWrapper = styled.div`
+  display: flex;
+  gap: 15px;
+
+  & input {
+    width: 20px;
+    border: none;
+    outline: transparent;
+  }
+
+  & label {
+    color: lightgrey;
+    align-self: flex-end;
+    user-select: none;
+    transition: .1s;
+
+    &:hover {
+      transform: scale(1.02);
+      transition: .1s;
+    }
+  }
+`
+
+const ErrorMessage = styled.div`
+  position: absolute;
+  color: darkred;
+  bottom: 10px;
 `

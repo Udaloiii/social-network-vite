@@ -9,6 +9,7 @@ import {Footer} from "@/layout/footer/Footer";
 import {Users} from "@/layout/users/Users";
 import {MessagesWithBlock} from "@/layout/messages/message/proba/MessagesWithBlock";
 import {Message} from "@/layout/messages/message/proba/Message";
+import {Login} from "@/components/login/Login";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <div>
             <Header/>
             <FlexWrapper justify={"space-between"}>
+                <Login/>
                 <Navigation/>
                 <Routes>
                     <Route path={'/'} element={<Profile/>}/>
