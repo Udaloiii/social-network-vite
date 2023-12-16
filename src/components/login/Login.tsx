@@ -3,30 +3,28 @@ import styled from "styled-components";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {LoginRequestType} from "@/api/auth-api";
+import {logInTC} from "@/store/reducers/auth-reducer";
+import {useAppDispatch} from "@/store/store";
 
-// type FormValues = {
-//     email: string
-//     password: string
-//     rememberMe: boolean
-// }
+
 const loginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(3),
     rememberMe: z.boolean().default(false),
 })
-type FormValues = z.infer<typeof loginSchema>
+// export type FormValues = z.infer<typeof loginSchema>
 export const Login: FC = () => {
-
-    const {register, handleSubmit, formState: {errors}} = useForm<FormValues>({
+    const dispatch = useAppDispatch()
+    const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginRequestType>({
         resolver: zodResolver(loginSchema),
     })
 
-    const onSubmit = (data: FormValues) => {
+    const onSubmit = (data: LoginRequestType) => {
         console.log(data)
+        dispatch(logInTC(data))
+        reset()
     }
-
-    // const emailRegex =
-    //     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
 
     return (
         <StyleLogin>
@@ -42,7 +40,7 @@ export const Login: FC = () => {
                     <ErrorMessage>{errors.password?.message}</ErrorMessage>
                 </UserBox>
                 <CheckboxWrapper>
-                    <input type={"checkbox"} id={"rememberMe"}/>
+                    <input {...register('rememberMe')} type={"checkbox"} id={"rememberMe"}/>
                     <label htmlFor={"rememberMe"}>remember me</label>
                 </CheckboxWrapper>
                 <center>
