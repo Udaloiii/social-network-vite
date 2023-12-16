@@ -5,15 +5,15 @@ import {messagesApi, MessagesType} from "@/api/messages-api";
 import {Pagination} from "@/components/pagination/Pagination";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {UserForMessage} from "@/layout/messages/message/proba/UserForMessage";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "@/store/store";
+import {useSelector} from "react-redux";
+import {AppStateType, useAppDispatch} from "@/store/store";
 import {setMessagesAC} from "@/store/reducers/messages-reducer";
 import {Loader1} from "@/components/loader/Loader1";
 
 
 export const MessagesWithBlock: FC = () => {
     const messages = useSelector<AppStateType, MessagesType[]>(state => state.messages)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [pageSize, setPageSize] = useState(10)
 

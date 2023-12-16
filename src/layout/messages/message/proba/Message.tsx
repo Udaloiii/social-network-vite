@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "@/store/store";
+import {useSelector} from "react-redux";
+import {AppStateType, useAppDispatch} from "@/store/store";
 import {FC, memo, useCallback, useEffect, useState} from "react";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
 import {addMessageAC, MessageStateType} from "@/store/reducers/messages-reducer";
@@ -10,7 +10,7 @@ import {getTime} from "@/utils/getTime";
 
 export const Message: FC = memo(() => {
     const messages = useSelector<AppStateType, MessageStateType[]>(state => state.messages)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const params = useParams()
     const id = params.id ? +params.id : 1
 

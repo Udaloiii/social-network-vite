@@ -2,8 +2,8 @@ import {FC, useEffect, useState} from "react";
 import styled from "styled-components";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {User} from "@/layout/users/user/User";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "@/store/store";
+import {useSelector} from "react-redux";
+import {AppStateType, useAppDispatch} from "@/store/store";
 import {changePageSizeAC, setUsersAC, setUsersCountAC, UserItemType} from "@/store/reducers/users-reducer";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Pagination} from "@/components/pagination/Pagination";
@@ -16,7 +16,7 @@ export const Users: FC = () => {
     const pageSize = useSelector<AppStateType, number>(state => state.users.pageSize)
 
     const usersCount = useSelector<AppStateType, number>(state => state.users.totalCount)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalCount, setTotalCount] = useState(usersCount)

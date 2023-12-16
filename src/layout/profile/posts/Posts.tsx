@@ -4,17 +4,17 @@ import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
 import {Post} from "@/layout/profile/posts/post/Post";
 // import {addLikeAC, addPostAC, PostType} from "@/store/reducers/posts-reducer";
-import {useDispatch} from "react-redux";
 import {getTime} from "@/utils/getTime";
-import { addPostAC, PostType} from "@/store/reducers/users-reducer";
+import {addPostAC, PostType} from "@/store/reducers/users-reducer";
 import {addLikeAC} from "@/store/reducers/profile-reducer";
+import {useAppDispatch} from "@/store/store";
 
 type PostsPropsType = {
     userId: number
     posts: PostType[]
 }
 export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
 
     const [time, setTime] = useState(new Date()) // для времени сообщения
