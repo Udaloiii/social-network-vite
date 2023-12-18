@@ -1,12 +1,12 @@
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed' // статусы для взаимодействия с сервером
 
-export type AppStateType = {
+export type AppType = {
     status: RequestStatusType,
     error: null | string,
     isInitialized: boolean
 }
 
-const initialState: AppStateType = {
+const initialState: AppType = {
     status: "idle",
     error: null,
     isInitialized: false
@@ -36,7 +36,7 @@ export const appReducer = (state = initialState, action: ActionType) => {
 export const setAppInitializedAC = (initialized: boolean) => {
     return {type: "SET-INITIALIZED-APP", initialized} as const
 }
-export const setAppErrorAC = (error: string) => {
+export const setAppErrorAC = (error: string | null) => {
     return {type: "SET-APP-ERROR", error} as const
 }
 export const setAppStatusAC = (status: RequestStatusType) => {

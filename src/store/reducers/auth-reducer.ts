@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {authApi, LoginRequestType} from "@/api/auth-api";
-import {setAppInitializedAC, setAppStatusAC} from "@/store/reducers/app-reducer";
+import {setAppErrorAC, setAppInitializedAC, setAppStatusAC} from "@/store/reducers/app-reducer";
 
 
 export type AuthStateType = {
@@ -38,6 +38,7 @@ export const authMeTC = () => (dispatch: Dispatch) => {
                 dispatch(setAppStatusAC("succeeded"))
             } else {
                 dispatch(setAppInitializedAC(true))
+                dispatch(setAppErrorAC(res.data.messages[0]))
                 // handleAppError(res.data,dispatch)
                 dispatch(logInAC(false))
             }
