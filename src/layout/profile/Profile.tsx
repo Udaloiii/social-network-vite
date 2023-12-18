@@ -7,12 +7,13 @@ import {usersApi} from "@/api/users-api";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {ProfileType, setProfileAC} from "@/store/reducers/profile-reducer";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {UserItemType} from "@/store/reducers/users-reducer";
 import {Loader1} from "@/components/loader/Loader1";
 
 
 export const Profile: FC = () => {
+    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const profile = useSelector<AppStateType, ProfileType>(state => state.profile)
     const user = useSelector<AppStateType, UserItemType[]>(state => state.users.items)
     const dispatch = useAppDispatch()
@@ -29,7 +30,10 @@ export const Profile: FC = () => {
                 dispatch(setProfileAC(id, res.data, image))
             })
     }, [profile.userId, id, dispatch, image]);
-    // console.log(profile)
+
+    if (!isInitialized) {
+        return <Navigate to={'/login'}/>
+    }
 
     return (
         <StyleProfile>

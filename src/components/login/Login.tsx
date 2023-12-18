@@ -5,7 +5,9 @@ import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {LoginRequestType} from "@/api/auth-api";
 import {logInTC} from "@/store/reducers/auth-reducer";
-import {useAppDispatch} from "@/store/store";
+import {AppStateType, useAppDispatch} from "@/store/store";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 
 const loginSchema = z.object({
@@ -15,6 +17,7 @@ const loginSchema = z.object({
 })
 // export type FormValues = z.infer<typeof loginSchema>
 export const Login: FC = () => {
+    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginRequestType>({
         resolver: zodResolver(loginSchema),
@@ -25,6 +28,11 @@ export const Login: FC = () => {
         dispatch(logInTC(data))
         reset()
     }
+
+    if (isInitialized) {
+        return <Navigate to={'/'}/>
+    }
+
 
     return (
         <StyleLogin>
@@ -184,11 +192,11 @@ const CheckboxWrapper = styled.div`
     color: lightgrey;
     align-self: flex-end;
     user-select: none;
-    transition: .1s;
+    transition: .3s;
 
     &:hover {
       transform: scale(1.02);
-      transition: .1s;
+      transition: .5s;
     }
   }
 `
