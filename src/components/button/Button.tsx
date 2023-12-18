@@ -24,6 +24,7 @@ const StyleButton = styled.button`
   transition: .2s;
   text-transform: uppercase;
   letter-spacing: 1px;
+  background-color: transparent;
 
   &::before {
     position: absolute;

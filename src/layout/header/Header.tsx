@@ -24,6 +24,5 @@ const HeaderStyled = styled.header`
 
   button {
     margin-right: 20px;
-    background-color: transparent;
   }
 `
