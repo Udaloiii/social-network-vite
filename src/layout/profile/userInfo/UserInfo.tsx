@@ -17,7 +17,7 @@ export const UserInfo = ({profile, user}: UserInfoPropsType) => {
                 </InfoWrap>
                 <InfoWrap>
                     <StyleDescription>Date of Birth:</StyleDescription>
-                    {user?.dateOfBorn || 1990}
+                    {user?.dateOfBorn || "10.12.1990"}
                 </InfoWrap>
                 <InfoWrap><StyleDescription>City:</StyleDescription>{user?.city || "Minsk"}</InfoWrap>
                 <InfoWrap><StyleDescription>Country: </StyleDescription>{user?.country || "Belarus"}</InfoWrap>

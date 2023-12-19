@@ -1,26 +1,38 @@
-import {ProfileResponseType} from "@/api/users-api";
+import {ProfileResponseType, usersApi} from "@/api/users-api";
 import {addPostAC, myPosts, PostType} from "@/store/reducers/users-reducer";
 import {formattedDate} from "@/utils/getDate";
-import {getTime} from "@/utils/getTime";
+import {Dispatch} from "redux";
+import {setAppErrorAC, setAppStatusAC} from "@/store/reducers/app-reducer";
+import {logInAC, setMyInfoAC} from "@/store/reducers/auth-reducer";
+import userAvatar from '../../assets/avatars/user.webp'
 
-export type ProfileType = ProfileResponseType & { posts: PostType[] }
+export type ProfileType = ProfileResponseType & {
+    posts: PostType[],
+    icon: string,
+    country: string,
+    city: string,
+    dateOfBorn: string
+}
 const initialState: ProfileType = {} as ProfileType
 // Type ACTION
-type ActionType = ReturnType<typeof setProfileAC> | ReturnType<typeof addPostAC> | ReturnType<typeof addLikeAC>
+type ActionType =
+    ReturnType<typeof setProfileAC>
+    | ReturnType<typeof addPostAC>
+    | ReturnType<typeof addLikeAC>
+    | ReturnType<typeof setMyInfoAC>
 
 
 export const profileReducer = (state = initialState, action: ActionType): ProfileType => {
     switch (action.type) {
         case "SET-PROFILE":
             return {
-                ...action.profile, posts: action.id === 26652 ? myPosts : [{
-                    id: 1,
-                    text: "Hello world!",
-                    icon: action.image,
-                    like: false,
-                    postTime: getTime(new Date()),
-                    postDate: formattedDate
-                }]
+                ...action.profile,
+                // posts: action.id === 26652 ? myPosts : [{
+                posts: myPosts,
+                city: "",
+                country: "",
+                dateOfBorn: "",
+                icon: "",
             }
 
         case "ADD-POST": {
@@ -29,7 +41,7 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
             const newPost: PostType = {
                 id: ++count,
                 text: action.text,
-                icon: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259",
+                icon: userAvatar,
                 like: false,
                 postTime: action.postTime,
                 postDate: formattedDate
@@ -46,6 +58,8 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
                 posts: state.posts.map(el => el.id === action.postId ? {...el, like: action.newValue} : el)
             }
 
+        case "SET-USER-INFO":
+            return {...state, fullName: action.name}
         default:
             return state
     }
@@ -59,4 +73,23 @@ export const setProfileAC = (id: number, profile: ProfileResponseType, image: st
 
 export const addLikeAC = (postId: number, newValue: boolean) => {
     return {type: "ADD-LIKE", postId, newValue} as const
+}
+
+// Thunks
+export const getProfileTC = (id: number, image: string) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    usersApi.getMyProfile(id)
+        .then(res => {
+            if (res.data.userId) {
+                dispatch(setProfileAC(res.data.userId, res.data, image))
+                dispatch(logInAC(true))
+                dispatch(setAppStatusAC("succeeded"))
+            } else {
+                dispatch(setAppErrorAC("user not found"))
+                // handleAppError(res.data,dispatch)
+            }
+        })
+        .catch(() => {
+            // handleServerError(err, dispatch)
+        })
 }

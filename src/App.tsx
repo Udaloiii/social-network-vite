@@ -15,21 +15,26 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {useEffect} from "react";
 import {authMeTC} from "@/store/reducers/auth-reducer";
 import {Snackbar} from "@/components/snackbar/Snackbar";
+import {Loader1} from "@/components/loader/Loader1";
 
 
 function App() {
-    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
+    const isAppInitialized = useSelector<AppStateType, boolean>(state => state.app.isInitialized)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(authMeTC())
     }, [dispatch]);
 
+    if (!isAppInitialized) {
+        return <div className="wrapperForLoader" style={{margin: "0"}}><Loader1/></div>
+    }
     return (
         <div>
-            {isInitialized && <Header/>}
+            {isLoggedIn && <Header/>}
             <FlexWrapper justify={"space-between"}>
-                {isInitialized && <Navigation/>}
+                {isLoggedIn && <Navigation/>}
                 <Snackbar/>
                 <Routes>
                     <Route path={'/'} element={<Profile/>}/>
