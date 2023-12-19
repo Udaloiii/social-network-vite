@@ -57,7 +57,13 @@ export type PostType = {
     postDate?: string
 }
 
-export type UserItemType = UserType & { posts: PostType[], icon: string }
+export type UserItemType = UserType & {
+    posts: PostType[],
+    icon: string,
+    country: string,
+    city: string,
+    dateOfBorn: string
+}
 type UsersStateType = {
     items: UserItemType[]
     totalCount: number
@@ -66,6 +72,50 @@ type UsersStateType = {
 }
 
 const logo = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10, logo11, logo12, logo13, logo14, logo15, logo16, logo17, logo18, logo19, logo20]
+const cities = [
+    {country: "Japan", city: "Tokyo"},
+    {country: "India", city: "Delhi"},
+    {country: "China", city: "Shanghai"},
+    {country: "Brazil", city: "Sao Paulo"},
+    {country: "Mexico", city: "Mexico City"},
+    {country: "Australia", city: "Melbourne"},
+    {country: "India", city: "Mumbai"},
+    {country: "China", city: "Beijing"},
+    {country: "Japan", city: "Osaka"},
+    {country: "Germany", city: "Berlin"},
+    {country: "United States", city: "New York"},
+    {country: "United States", city: "Los Angeles"},
+    {country: "Argentina", city: "Buenos Aires"},
+    {country: "Turkey", city: "Istanbul"},
+    {country: "South Korea", city: "Seoul"},
+    {country: "Spain", city: "Madrid"},
+    {country: "United Kingdom", city: "Manchester"},
+    {country: "Brazil", city: "Rio de Janeiro"},
+    {country: "United Kingdom", city: "London"},
+    {country: "France", city: "Paris"}
+]
+const ages = [
+    "01.01.2004",
+    "15.06.2003",
+    "30.11.2002",
+    "12.04.2001",
+    "25.09.2000",
+    "08.02.1999",
+    "21.07.1998",
+    "03.12.1997",
+    "16.05.1996",
+    "29.10.1995",
+    "11.03.1994",
+    "24.08.1993",
+    "06.01.1992",
+    "19.06.1991",
+    "02.11.1990",
+    "15.04.1989",
+    "28.09.1988",
+    "10.02.1987",
+    "23.07.1986",
+    "05.12.1985"
+]
 
 
 const initialState = {
@@ -93,6 +143,9 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
                         condition = 19 - (remaining % 20);
                     }
                     const randomLogo = logo[condition];
+                    const {country} = cities[condition];
+                    const {city} = cities[condition];
+                    const dateOfBirth = ages[condition];
                     return {
                         ...el,
                         icon: el.id === 26652 ? "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259" : randomLogo,
@@ -103,7 +156,9 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
                             like: false,
                             postTime: getTime(new Date),
                             postDate: formattedDate
-                        }]
+                        }], city: city,
+                        country: country,
+                        dateOfBorn: dateOfBirth
                     }
                 })
             }
