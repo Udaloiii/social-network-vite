@@ -5,16 +5,22 @@ import {setAppErrorAC, setAppInitializedAC, setAppStatusAC} from "@/store/reduce
 
 export type AuthStateType = {
     isLoggedIn: boolean
+    myId: number
+    name: string
 }
-const initialState: AuthStateType = {
+const initialState = {
     isLoggedIn: false
-}
+} as AuthStateType
 
-type ActionType = ReturnType<typeof logInAC>
+type ActionType = ReturnType<typeof logInAC> | ReturnType<typeof setMyInfoAC>
 export const authReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case 'LOG-IN':
             return {...state, isLoggedIn: action.isLoggedIn}
+
+        case 'SET-USER-INFO':
+            return {...state, myId: action.id, name: action.name}
+
         default:
             return state
     }
@@ -23,6 +29,10 @@ export const authReducer = (state = initialState, action: ActionType) => {
 // action creators
 export const logInAC = (isLoggedIn: boolean) => {
     return {type: "LOG-IN", isLoggedIn} as const
+}
+
+export const setMyInfoAC = (id: number, name: string) => {
+    return {type: "SET-USER-INFO", id, name} as const
 }
 
 
@@ -36,6 +46,7 @@ export const authMeTC = () => (dispatch: Dispatch) => {
                 dispatch(setAppInitializedAC(true))
                 dispatch(logInAC(true))
                 dispatch(setAppStatusAC("succeeded"))
+                dispatch(setMyInfoAC(res.data.data.id, res.data.data.login))
             } else {
                 dispatch(setAppInitializedAC(true))
                 dispatch(setAppErrorAC(res.data.messages[0]))
@@ -57,6 +68,7 @@ export const logInTC = (data: LoginRequestType) => (dispatch: Dispatch) => {
                 dispatch(logInAC(true))
                 dispatch(setAppStatusAC("succeeded"))
             } else {
+                dispatch(setAppErrorAC(res.data.messages[0]))
                 // handleAppError(res.data,dispatch)
             }
         })
@@ -72,6 +84,7 @@ export const logOutTC = () => (dispatch: Dispatch) => {
                 dispatch(logInAC(false))
                 dispatch(setAppStatusAC("succeeded"))
             } else {
+                dispatch(setAppErrorAC(res.data.messages[0]))
                 // handleAppError(res.data,dispatch)
             }
         })
