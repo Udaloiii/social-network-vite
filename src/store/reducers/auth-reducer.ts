@@ -67,6 +67,7 @@ export const logInTC = (data: LoginRequestType) => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(logInAC(true))
                 dispatch(setAppStatusAC("succeeded"))
+                dispatch(setMyInfoAC(res.data.data.userId, ""))
             } else {
                 dispatch(setAppErrorAC(res.data.messages[0]))
                 // handleAppError(res.data,dispatch)
