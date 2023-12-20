@@ -3,7 +3,6 @@ import {FC, useEffect, useState} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {AddItemForm} from "@/components/addItemForm/AddItemForm";
 import {Post} from "@/layout/profile/posts/post/Post";
-// import {addLikeAC, addPostAC, PostType} from "@/store/reducers/posts-reducer";
 import {getTime} from "@/utils/getTime";
 import {addPostAC, PostType} from "@/store/reducers/users-reducer";
 import {addLikeAC} from "@/store/reducers/profile-reducer";
@@ -23,7 +22,9 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
         dispatch(addPostAC(userId, text, getTime(time)))
     }
     const addLike = (postId: number, newValue: boolean) => {
-        dispatch(addLikeAC(postId, newValue))
+        console.log(`like:${newValue}`)
+        // dispatch(addLikeAC(postId, newValue))
+        dispatch(addLikeAC(userId, postId, newValue))
     }
 
     useEffect(() => {
