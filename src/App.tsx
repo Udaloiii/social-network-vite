@@ -37,7 +37,8 @@ function App() {
                 {isLoggedIn && <Navigation/>}
                 <Snackbar/>
                 <Routes>
-                    <Route path={'/'} element={<Profile/>}/>
+                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                    {/*<Route path={'/'} element={<Profile/>}/>*/}
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/users'} element={<Users/>}/>
                     {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
@@ -51,7 +52,7 @@ function App() {
                     <Route path={'*'} element={<Navigate to={'/404'}/>}/>
                 </Routes>
             </FlexWrapper>
-            <Footer/>
+            {isLoggedIn && <Footer/>}
         </div>
     )
 }
