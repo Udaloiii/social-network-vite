@@ -20,7 +20,7 @@ import logo18 from "../../assets/avatars/9439773.webp";
 import logo19 from "../../assets/avatars/9439767.webp";
 import logo20 from "../../assets/avatars/9439726.webp";
 import {formattedDate} from "@/utils/getDate";
-import {getTime} from "@/utils/getTime";
+import {addLikeAC} from "@/store/reducers/profile-reducer";
 
 export const myPosts: PostType[] = [
     {
@@ -116,6 +116,28 @@ const ages = [
     "23.07.1986",
     "05.12.1985"
 ]
+const timestamps = [
+    "05.09.2023 19:33",
+    "17.09.2023 10:15",
+    "28.09.2023 08:45",
+    "10.10.2023 14:20",
+    "21.10.2023 16:55",
+    "02.11.2023 12:30",
+    "13.11.2023 21:05",
+    "24.11.2023 18:10",
+    "06.12.2023 22:40",
+    "17.12.2023 11:25",
+    "29.12.2023 17:50",
+    "03.09.2023 09:05",
+    "14.09.2023 13:45",
+    "25.09.2023 20:15",
+    "07.10.2023 15:00",
+    "18.10.2023 09:45",
+    "30.10.2023 16:30",
+    "11.11.2023 22:55",
+    "22.11.2023 11:40",
+    "04.12.2023 18:25"
+]
 
 
 const initialState = {
@@ -128,6 +150,7 @@ type ActionType =
     | ReturnType<typeof setUsersCountAC>
     | ReturnType<typeof changePageSizeAC>
     | ReturnType<typeof addPostAC>
+    | ReturnType<typeof addLikeAC>
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersStateType => {
@@ -154,8 +177,8 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
                             text: "Hello world!",
                             icon: randomLogo,
                             like: false,
-                            postTime: getTime(new Date),
-                            postDate: formattedDate
+                            postTime:"",
+                            postDate: timestamps[condition]
                         }], city: city,
                         country: country,
                         dateOfBorn: dateOfBirth
@@ -191,6 +214,13 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
                 items: state.items.map(el => el.id === action.id ? {...el, posts: [newPost, ...el.posts]} : el)
             }
         }
+
+
+        case "ADD-LIKE":
+            return {
+                ...state,
+                items: state.items.map(el => el.id === action.userId ? {...el, posts: el.posts.map(el=> el.id === action.postId? {...el, like:action.newValue}: el)} : el)
+            }
 
         default:
             return state
