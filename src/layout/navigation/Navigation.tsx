@@ -24,7 +24,7 @@ const StyleNavigation = styled.nav`
   gap: 30px;
   width: 150px;
   padding-top: 20px;
-  background-color: rgba(23, 23, 23, 0.8);
+  background-color: rgb(42, 42, 42);
   min-height: calc(100vh - 110px);
   font-family: "Rubik Doodle Shadow", sans-serif;
   font-size: 1.1rem;
@@ -65,7 +65,7 @@ const StyleLink = styled(NavLink)`
     &::before {
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
-      border-right: 10px solid #c9ffeb;
+      border-right: 10px solid rgb(204, 204, 204);
       transition: .2s ease-in-out;
     }
   }

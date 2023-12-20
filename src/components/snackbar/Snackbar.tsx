@@ -43,10 +43,10 @@ const Wrapper = styled.div`
   transform: translateX(-50%);
   background-color: royalblue;
   color: #FDD835;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
   transition: opacity 0.5s ease-in-out;
-  font-size: 1.4rem;
+  font-size: 1rem;
 
   & button {
     width: 20px;

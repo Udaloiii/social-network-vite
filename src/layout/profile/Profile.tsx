@@ -10,6 +10,7 @@ import {Navigate, useParams} from "react-router-dom";
 import {UserItemType} from "@/store/reducers/users-reducer";
 import {Loader1} from "@/components/loader/Loader1";
 import userAvatar from '../../assets/avatars/user.webp'
+import background from '../../assets/backgrounds/3384318_57622.jpg'
 
 
 export const Profile: FC = () => {
@@ -54,7 +55,8 @@ export const Profile: FC = () => {
 }
 
 const StyleProfile = styled.section`
-  background-color: #c9ffeb;
+  //background: url(${background})  repeat;
+  background: url(${background}) 0 0/250px 250px repeat;
   flex-grow: 1;
   //width: calc(100vw - 150px);
 `

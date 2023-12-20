@@ -27,6 +27,7 @@ export const UserInfo = ({profile, user}: UserInfoPropsType) => {
 }
 
 const UserInfoWrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.4);
   padding: 15px;
   min-width: 250px;
   width: 450px;
