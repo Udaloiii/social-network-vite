@@ -24,8 +24,8 @@ export const Loader1 = () => {
 
 const LoaderWrapper = styled.div`
   //width: calc(100vw - 150px);
-  height: 100vh;
-  background-color: #c9ffeb;
+  //height: 100vh;
+  //background-color: #c9ffeb;
   display: flex;
   justify-content: center;
   padding-top: 100px;
