@@ -8,7 +8,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {getProfileTC, ProfileType} from "@/store/reducers/profile-reducer";
 import {Navigate, useParams} from "react-router-dom";
 import {UserItemType} from "@/store/reducers/users-reducer";
-import {Loader1} from "@/components/loader/Loader1";
+import {Loader} from "@/components/loader/Loader";
 import userAvatar from '../../assets/avatars/user.webp'
 import background from '../../assets/backgrounds/3384318_57622.jpg'
 
@@ -49,16 +49,31 @@ export const Profile: FC = () => {
                     </FlexWrapper>
                     <Posts userId={id} posts={posts}/>
                 </ProfileWrapper>
-                : <Loader1/>}
+                : <Loader/>}
         </StyleProfile>
+
+    // <StyleProfile>
+    //         <ProfileWrapper>
+    //             <FlexWrapper gap={"50px"}>
+    //                 <StyleProfileImage
+    //                     src={image}
+    //                 />
+    //                 <UserInfo
+    //                     user={user?.filter(el => el.id === id)[0]}
+    //                     profile={profile}
+    //                 />
+    //             </FlexWrapper>
+    //             <Posts userId={id} posts={posts}/>
+    //         </ProfileWrapper>
+    // </StyleProfile>
     )
 }
 
 const StyleProfile = styled.section`
-  //background: url(${background})  repeat;
   background: url(${background}) 0 0/250px 250px repeat;
-  flex-grow: 1;
-  //width: calc(100vw - 150px);
+  //background-color: royalblue;
+  //flex-grow: 1;
+  width: calc(100vw - 150px);
 `
 const ProfileWrapper = styled.div`
   display: flex;

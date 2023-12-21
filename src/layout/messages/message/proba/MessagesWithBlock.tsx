@@ -8,7 +8,7 @@ import {UserForMessage} from "@/layout/messages/message/proba/UserForMessage";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {setMessagesAC} from "@/store/reducers/messages-reducer";
-import {Loader1} from "@/components/loader/Loader1";
+import {Loader} from "@/components/loader/Loader";
 
 
 export const MessagesWithBlock: FC = () => {
@@ -66,7 +66,7 @@ export const MessagesWithBlock: FC = () => {
                                         onPageChange={setCurrentPage} siblingCount={2}/>
                         </PaginationBottomWrapper>
                     </>
-                    : <Loader1/>
+                    : <Loader/>
             }
         </StyleMessages>
     )

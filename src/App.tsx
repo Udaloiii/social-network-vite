@@ -15,7 +15,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {useEffect} from "react";
 import {authMeTC} from "@/store/reducers/auth-reducer";
 import {Snackbar} from "@/components/snackbar/Snackbar";
-import {Loader1} from "@/components/loader/Loader1";
+import {Loader} from "@/components/loader/Loader";
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
     }, [dispatch]);
 
     if (!isAppInitialized) {
-        return <div className="wrapperForLoader" style={{margin: "0"}}><Loader1/></div>
+        return <div style={{margin: "0"}}><Loader/></div>
     }
     return (
         <div>

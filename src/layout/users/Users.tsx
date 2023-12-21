@@ -7,7 +7,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {changePageSizeAC, setUsersAC, setUsersCountAC, UserItemType} from "@/store/reducers/users-reducer";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Pagination} from "@/components/pagination/Pagination";
-import {Loader1} from "@/components/loader/Loader1";
+import {Loader} from "@/components/loader/Loader";
 import {usersApi} from "@/api/users-api";
 
 
@@ -64,7 +64,7 @@ export const Users: FC = () => {
                                     onPageChange={setCurrentPage} siblingCount={2}/>
                     </PaginationBottomWrapper>
                 </>
-                : <Loader1/>
+                : <Loader/>
             }
         </StyleUsers>
 

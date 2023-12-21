@@ -4,7 +4,7 @@ import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {ArticlesType, newsApi} from "@/api/news-api";
 import {Pagination} from "@/components/pagination/Pagination";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
-import {Loader1} from "@/components/loader/Loader1";
+import {Loader} from "@/components/loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
 import {setNewsAC} from "@/store/reducers/news-reducer";
@@ -75,7 +75,7 @@ export const News: FC = () => {
                                     onPageChange={setCurrentPage} siblingCount={2}/>
                     </PaginationBottomWrapper>
                 </>
-                : <Loader1/>
+                : <Loader/>
             }
         </StyleNews>
 
