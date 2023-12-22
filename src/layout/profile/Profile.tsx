@@ -70,8 +70,8 @@ export const Profile: FC = () => {
 }
 
 const StyleProfile = styled.section`
-  background: url(${background}) 0 0/250px 250px repeat;
-  //background-color: royalblue;
+  //background: url(${background}) 0 0/250px 250px repeat;
+  background: linear-gradient(180deg, #1485e6,#00c2f0,#2ceeb8);
   //flex-grow: 1;
   width: calc(100vw - 150px);
 `

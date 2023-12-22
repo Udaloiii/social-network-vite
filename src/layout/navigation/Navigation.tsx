@@ -24,7 +24,8 @@ const StyleNavigation = styled.nav`
   gap: 30px;
   width: 150px;
   padding-top: 20px;
-  background-color: rgb(42, 42, 42);
+  //background-color: rgb(42, 42, 42);
+  background: linear-gradient(90deg, #142126,#2e4052,#14161f);
   min-height: calc(100vh - 110px);
   font-family: "Rubik Doodle Shadow", sans-serif;
   font-size: 1.1rem;

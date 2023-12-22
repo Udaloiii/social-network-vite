@@ -8,6 +8,7 @@ import {logInTC} from "@/store/reducers/auth-reducer";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
+import background from '../../assets/backgrounds/background-app.webp'
 
 
 const loginSchema = z.object({
@@ -35,7 +36,8 @@ export const Login: FC = () => {
 
 
     return (
-        <StyleLogin>
+        <LoginWrap>
+            <StyleLogin>
             <StyleForm onSubmit={handleSubmit(onSubmit)}>
                 <UserBox>
                     <StyleInput {...register('email')} required/>
@@ -59,9 +61,16 @@ export const Login: FC = () => {
                 </center>
             </StyleForm>
         </StyleLogin>
+        </LoginWrap>
     )
 }
 
+const LoginWrap = styled.div`
+  //background: url(${background}) 0 0/cover repeat;
+  background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
+  width: 100vw;
+  height: 100vh;
+`
 const StyleLogin = styled.div`
   position: absolute;
   top: 50%;

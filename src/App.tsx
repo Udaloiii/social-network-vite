@@ -28,7 +28,14 @@ function App() {
     }, [dispatch]);
 
     if (!isAppInitialized) {
-        return <div style={{margin: "0"}}><Loader/></div>
+        return <div style={{
+            width: "100vw",
+            height: "100vh",
+            background: "linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db)",
+            margin: "0"
+        }}>
+            <Loader/>
+        </div>
     }
     return (
         <div>
