@@ -16,6 +16,7 @@ import {useEffect} from "react";
 import {authMeTC} from "@/store/reducers/auth-reducer";
 import {Snackbar} from "@/components/snackbar/Snackbar";
 import {Loader} from "@/components/loader/Loader";
+import {GoToTop} from "@/components/goToTop/GoToTop";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <FlexWrapper justify={"space-between"}>
                 {isLoggedIn && <Navigation/>}
                 <Snackbar/>
+                <GoToTop/>
                 <Routes>
                     <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
                     {/*<Route path={'/'} element={<Profile/>}/>*/}
