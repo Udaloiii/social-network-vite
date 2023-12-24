@@ -36,6 +36,11 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    transform: scale(1.1);
+    transition: .2s;
+  }
+
   &:active {
     transform: scale(0.9);
     transition: .2s;
@@ -49,7 +54,7 @@ const Button = styled.button`
     transition: .2s;
 
     &:active {
-      box-shadow: 0 0 8px 2px white;
+      box-shadow: 0 0 6px 1px black;
       color: royalblue;
       transition: .2s;
     }
