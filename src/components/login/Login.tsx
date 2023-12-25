@@ -8,7 +8,7 @@ import {logInTC} from "@/store/reducers/auth-reducer";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import background from '../../assets/backgrounds/background-app.webp'
+import background from '../../assets/backgrounds/background-login.webp'
 
 
 const loginSchema = z.object({
@@ -25,7 +25,6 @@ export const Login: FC = () => {
     })
 
     const onSubmit = (data: LoginRequestType) => {
-        console.log(data)
         dispatch(logInTC(data))
         reset()
     }
@@ -38,36 +37,35 @@ export const Login: FC = () => {
     return (
         <LoginWrap>
             <StyleLogin>
-            <StyleForm onSubmit={handleSubmit(onSubmit)}>
-                <UserBox>
-                    <StyleInput {...register('email')} required/>
-                    <StyleLabel>Username</StyleLabel>
-                    <ErrorMessage>{errors.email?.message}</ErrorMessage>
-                </UserBox>
-                <UserBox>
-                    <StyleInput {...register('password')} type={"password"} required/>
-                    <StyleLabel>Password</StyleLabel>
-                    <ErrorMessage>{errors.password?.message}</ErrorMessage>
-                </UserBox>
-                <CheckboxWrapper>
-                    <input {...register('rememberMe')} type={"checkbox"} id={"rememberMe"}/>
-                    <label htmlFor={"rememberMe"}>remember me</label>
-                </CheckboxWrapper>
-                <center>
-                    <StyleButton type={"submit"}>
-                        SEND
-                        <span></span>
-                    </StyleButton>
-                </center>
-            </StyleForm>
-        </StyleLogin>
+                <StyleForm onSubmit={handleSubmit(onSubmit)}>
+                    <UserBox>
+                        <StyleInput {...register('email')} required/>
+                        <StyleLabel>Username</StyleLabel>
+                        <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                    </UserBox>
+                    <UserBox>
+                        <StyleInput {...register('password')} type={"password"} required/>
+                        <StyleLabel>Password</StyleLabel>
+                        <ErrorMessage>{errors.password?.message}</ErrorMessage>
+                    </UserBox>
+                    <CheckboxWrapper>
+                        <input {...register('rememberMe')} type={"checkbox"} id={"rememberMe"}/>
+                        <label htmlFor={"rememberMe"}>remember me</label>
+                    </CheckboxWrapper>
+                    <center>
+                        <StyleButton type={"submit"}>
+                            SEND
+                            <span></span>
+                        </StyleButton>
+                    </center>
+                </StyleForm>
+            </StyleLogin>
         </LoginWrap>
     )
 }
 
 const LoginWrap = styled.div`
-  //background: url(${background}) 0 0/cover repeat;
-  background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
+  background: url(${background}) 100% 55%/ cover no-repeat;
   width: 100vw;
   height: 100vh;
 `
@@ -78,7 +76,7 @@ const StyleLogin = styled.div`
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgb(24, 20, 20);
+  background: rgba(0, 0, 0, 0.8);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
@@ -212,6 +210,7 @@ const CheckboxWrapper = styled.div`
 
 const ErrorMessage = styled.div`
   position: absolute;
-  color: darkred;
-  bottom: 10px;
+  color: #880000;
+  bottom: 5px;
+  font-size: 0.8rem;
 `
