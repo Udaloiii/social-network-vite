@@ -28,7 +28,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({
     return (
         <StyleAddForm>
             <FlexWrapper direction={"column"} gap={"30px"} justify={"start"} align={"start"}>
-                <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue}/>
+                <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue} addItem={addItemHandler}/>
                 <Button text={buttonTitle} addItem={addItemHandler}/>
             </FlexWrapper>
         </StyleAddForm>
