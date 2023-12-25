@@ -9,9 +9,11 @@ import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {setMessagesAC} from "@/store/reducers/messages-reducer";
 import {Loader} from "@/components/loader/Loader";
+import {Navigate} from "react-router-dom";
 
 
 export const MessagesWithBlock: FC = () => {
+    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const messages = useSelector<AppStateType, MessagesType[]>(state => state.messages)
     const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
@@ -44,6 +46,10 @@ export const MessagesWithBlock: FC = () => {
         }
     }, [messages.length, dispatch]);
 
+    if (!isInitialized) {
+        return <Navigate to={'/login'}/>
+    }
+
     return (
         <StyleMessages>
             <CustomSelect title={"сообщений"} value={pageSize} options={[10, 25, 50]}
@@ -74,7 +80,6 @@ export const MessagesWithBlock: FC = () => {
 
 const StyleMessages = styled.section`
   position: relative;
-  background-color: #c9ffeb;
   flex-grow: 1;
   //width: calc(100vw - 150px);
   padding: 20px;

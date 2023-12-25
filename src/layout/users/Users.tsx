@@ -9,9 +9,11 @@ import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Pagination} from "@/components/pagination/Pagination";
 import {Loader} from "@/components/loader/Loader";
 import {usersApi} from "@/api/users-api";
+import {Navigate} from "react-router-dom";
 
 
 export const Users: FC = () => {
+    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const users = useSelector<AppStateType, UserItemType[]>(state => state.users.items)
     const pageSize = useSelector<AppStateType, number>(state => state.users.pageSize)
 
@@ -43,7 +45,9 @@ export const Users: FC = () => {
             })
     }, [pageSize, usersCount, currentPage, dispatch]);
 
-
+    if (!isInitialized) {
+        return <Navigate to={'/login'}/>
+    }
     return (
         <StyleUsers>
             <CustomSelect title={"юзеров"} value={pageSize} options={[10, 25, 50]}
@@ -73,7 +77,7 @@ export const Users: FC = () => {
 
 const StyleUsers = styled.section`
   position: relative;
-  background-color: #c9ffeb;
+  //background-color: #c9ffeb;
   //width: calc(100vw - 150px);
   flex-grow: 1;
   padding: 20px;

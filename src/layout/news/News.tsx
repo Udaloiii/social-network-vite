@@ -8,9 +8,11 @@ import {Loader} from "@/components/loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
 import {setNewsAC} from "@/store/reducers/news-reducer";
+import {Navigate} from "react-router-dom";
 
 
 export const News: FC = () => {
+    const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const news = useSelector<AppStateType, ArticlesType[]>(state => state.news)
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
@@ -28,8 +30,8 @@ export const News: FC = () => {
         setCurrentPage(1)
     }
 
-    const isMounted = useRef(false);
 
+    const isMounted = useRef(false);
     useEffect(() => {
         if (!isMounted.current && news.length) {
             isMounted.current = true;
@@ -46,6 +48,11 @@ export const News: FC = () => {
                 })
         }
     }, [dispatch, news.length])
+
+
+    if (!isInitialized) {
+        return <Navigate to={'/login'}/>
+    }
     return (
         <StyleNews>
             <CustomSelect title={"новостей на странице"} options={[10, 25, 50]} value={pageSize}
@@ -84,7 +91,7 @@ export const News: FC = () => {
 
 const StyleNews = styled.section`
   position: relative;
-  background-color: #c9ffeb;
+  //background-color: #c9ffeb;
   flex-grow: 1;
 
   padding: 20px;
