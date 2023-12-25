@@ -36,13 +36,15 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
             <FlexWrapper direction={"column"} gap={"25px"}>
                 <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder={"create you post"}
                              buttonTitle={"add post"}/>
-                {posts?.map((el, index) => {
-                    return <Post key={index} id={el.id} icon={el.icon} post={el.text} like={el.like}
-                                 postTime={el.postTime}
-                                 postDate={el.postDate}
-                                 addLike={addLike}
-                    />
-                })}
+                <PostWrap>
+                    {posts?.map((el, index) => {
+                        return <Post key={index} id={el.id} icon={el.icon} post={el.text} like={el.like}
+                                     postTime={el.postTime}
+                                     postDate={el.postDate}
+                                     addLike={addLike}
+                        />
+                    })}
+                </PostWrap>
             </FlexWrapper>
         </StylePosts>
     )
@@ -68,5 +70,14 @@ const StylePosts = styled.div`
       }
     }
   }
+`
+
+const PostWrap = styled.div`
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: linear-gradient(180deg, #1485e6, #00c2f0, #2ceeb8);
+  border-radius: 6px;
 `
 

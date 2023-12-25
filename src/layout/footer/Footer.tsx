@@ -11,5 +11,5 @@ export const Footer:FC = () => {
 
 const StyleFooter = styled.footer`
   height: 50px;
-  background-color: #6f9d99;
+  //background: linear-gradient(90deg, #4cbeff, #ffffff);
 `

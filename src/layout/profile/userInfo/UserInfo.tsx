@@ -27,10 +27,12 @@ export const UserInfo = ({profile, user}: UserInfoPropsType) => {
 }
 
 const UserInfoWrapper = styled.div`
-  background-color: rgba(255, 255, 255, 0.4);
+  //background-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #1485e6, #00c2f0, #2ceeb8);
   padding: 15px;
-  min-width: 250px;
-  width: 450px;
+  min-width: 300px;
+  width: 350px;
+  max-width: 450px;
   display: flex;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -43,7 +45,7 @@ const UserInfoWrapper = styled.div`
 const StyleName = styled.span`
   text-transform: capitalize;
   font-family: "Special Elite", sans-serif;
-  color: royalblue;
+  color: whitesmoke;
   letter-spacing: 2px;
   font-size: 1.5rem;
 `

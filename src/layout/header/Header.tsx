@@ -21,8 +21,7 @@ const HeaderStyled = styled.header`
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  //background: linear-gradient(90deg, #b6c3ca, #ffffff);
-  background: linear-gradient(90deg, #4cbeff, #ffffff);
+  //background: linear-gradient(90deg, #4cbeff, #ffffff);
 
   button {
     margin-right: 20px;

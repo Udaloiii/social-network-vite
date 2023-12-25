@@ -17,6 +17,8 @@ import {authMeTC} from "@/store/reducers/auth-reducer";
 import {Snackbar} from "@/components/snackbar/Snackbar";
 import {Loader} from "@/components/loader/Loader";
 import {GoToTop} from "@/components/goToTop/GoToTop";
+import background from './assets/backgrounds/background-app.webp'
+
 
 
 function App() {
@@ -32,14 +34,14 @@ function App() {
         return <div style={{
             width: "100vw",
             height: "100vh",
-            background: "linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db)",
+            background: `url(${background}) 0 0/700px repeat`,
             margin: "0"
         }}>
             <Loader/>
         </div>
     }
     return (
-        <div>
+        <div style={{background:`url(${background}) 0 0/700px repeat`}}>
             {isLoggedIn && <Header/>}
             <FlexWrapper justify={"space-between"}>
                 {isLoggedIn && <Navigation/>}

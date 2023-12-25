@@ -24,8 +24,7 @@ const StyleNavigation = styled.nav`
   gap: 30px;
   width: 150px;
   padding-top: 20px;
-  //background-color: rgb(42, 42, 42);
-  background: linear-gradient(90deg, #142126,#2e4052,#14161f);
+  //background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
   min-height: calc(100vh - 110px);
   font-family: "Rubik Doodle Shadow", sans-serif;
   font-size: 1.1rem;
@@ -66,7 +65,8 @@ const StyleLink = styled(NavLink)`
     &::before {
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
-      border-right: 10px solid rgb(204, 204, 204);
+      //border-right: 10px solid rgb(204, 204, 204);
+      border-right: 10px solid rgba(255, 255, 255, 0.5);
       transition: .2s ease-in-out;
     }
   }

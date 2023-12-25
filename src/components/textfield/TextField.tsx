@@ -1,4 +1,4 @@
-import {ChangeEvent, FC} from "react";
+import {ChangeEvent, FC, KeyboardEvent} from "react";
 import styled from "styled-components";
 
 type TextFieldType = {
@@ -8,19 +8,29 @@ type TextFieldType = {
     name?: string
     as?: string
     onChange?: (value: string) => void
+    addItem?: () => void
 }
-export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange, as, value}: TextFieldType) => {
+export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange, as, value, addItem}: TextFieldType) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChange?.(e.currentTarget.value)
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            addItem?.()
+        }
+    }
 
     return (
-        <StyleTextfield type={type} placeholder={placeholder} name={name} onChange={handleChange} value={value}
+        <StyleTextfield value={value} type={type} placeholder={placeholder} name={name} onChange={handleChange}
+                        onKeyPress={onKeyPressHandler}
                         as={as ? as : "input"}/>
     )
 }
 
 const StyleTextfield = styled.input`
   border: 1px solid #343434;
-  background-color: #3b3b3b;
+  //background-color: #3b3b3b;
+  background: linear-gradient(180deg, #1485e6, #00c2f0, #2ceeb8);
+  opacity: 0.7;
   transition: .3s;
   outline: none;
   border-radius: 4px;
@@ -35,5 +45,6 @@ const StyleTextfield = styled.input`
     transform: scale(1.05);
     transition: .3s;
     border: 1px solid #646cff;
+    opacity: 1;
   }
 `

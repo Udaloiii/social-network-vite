@@ -31,10 +31,13 @@ const StylePost = styled.div`
   gap: 20px;
   align-items: flex-end;
   transition: .2s;
+  color: #c4ffff;
+  width: max-content;
 
   svg {
     cursor: pointer;
     transition: .2s;
+    padding-bottom: 2px;
 
     &:hover {
       transform: scale(1.3);
@@ -47,11 +50,12 @@ const StylePost = styled.div`
     }
   }
 `
-const StyleText = styled.span`
+const StyleText = styled.div`
   max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   word-wrap: break-word;
+  align-items: flex-end;
 `
 
 const StyleImg = styled.img`
@@ -60,6 +64,8 @@ const StyleImg = styled.img`
   user-select: none;
 `
 
-const PostTime = styled.span`
+const PostTime = styled.div`
   font-size: 0.5rem;
+  color: grey;
+  padding-bottom: 2px;
 `
