@@ -20,7 +20,6 @@ import {GoToTop} from "@/components/goToTop/GoToTop";
 import background from './assets/backgrounds/background-app.webp'
 
 
-
 function App() {
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const isAppInitialized = useSelector<AppStateType, boolean>(state => state.app.isInitialized)
@@ -42,28 +41,28 @@ function App() {
     }
     return (
         <div style={{background:`url(${background}) 0 0/700px repeat`}}>
-            {isLoggedIn && <Header/>}
-            <FlexWrapper justify={"space-between"}>
-                {isLoggedIn && <Navigation/>}
-                <Snackbar/>
-                <GoToTop/>
-                <Routes>
-                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
-                    {/*<Route path={'/'} element={<Profile/>}/>*/}
-                    <Route path={'/profile'} element={<Profile/>}/>
-                    <Route path={'/users'} element={<Users/>}/>
-                    {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
-                    <Route path={'/users/:id'} element={<Profile/>}/>
-                    {/*<Route path={'messages'} element={<Messages/>}/>*/}
-                    <Route path={'/messages'} element={<MessagesWithBlock/>}/>
-                    <Route path={'/messages/:id'} element={<Message/>}/>
-                    <Route path={'/news'} element={<News/>}/>
-                    <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/404'} element={<PageError/>}/>
-                    <Route path={'*'} element={<Navigate to={'/404'}/>}/>
-                </Routes>
-            </FlexWrapper>
-            {isLoggedIn && <Footer/>}
+                {isLoggedIn && <Header/>}
+                <FlexWrapper justify={"space-between"}>
+                    {isLoggedIn && <Navigation/>}
+                    <Snackbar/>
+                    <GoToTop/>
+                    <Routes>
+                        <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                        {/*<Route path={'/'} element={<Profile/>}/>*/}
+                        <Route path={'/profile'} element={<Profile/>}/>
+                        <Route path={'/users'} element={<Users/>}/>
+                        {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
+                        <Route path={'/users/:id'} element={<Profile/>}/>
+                        {/*<Route path={'messages'} element={<Messages/>}/>*/}
+                        <Route path={'/messages'} element={<MessagesWithBlock/>}/>
+                        <Route path={'/messages/:id'} element={<Message/>}/>
+                        <Route path={'/news'} element={<News/>}/>
+                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/404'} element={<PageError/>}/>
+                        <Route path={'*'} element={<Navigate to={'/404'}/>}/>
+                    </Routes>
+                </FlexWrapper>
+                {isLoggedIn && <Footer/>}
         </div>
     )
 }

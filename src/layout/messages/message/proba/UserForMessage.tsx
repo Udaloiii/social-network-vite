@@ -19,8 +19,9 @@ export const UserForMessage = ({name, text, id}: UserForMessagePropsType) => {
     )
 }
 
-const StyleUser = styled.span`
+const StyleUser = styled.div`
   //width: 500px;
+  width: max-content;
 `
 
 const StyleAvatar = styled.img`
@@ -38,4 +39,6 @@ const StyleText = styled.span`
 const StyleName = styled.span`
   width: 100px;
   text-transform: capitalize;
+  font-family: "Josefine Sans", sans-serif;
+  color: royalblue;
 `

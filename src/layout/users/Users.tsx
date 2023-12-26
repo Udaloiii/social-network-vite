@@ -78,9 +78,13 @@ export const Users: FC = () => {
 const StyleUsers = styled.section`
   position: relative;
   //background-color: #c9ffeb;
+  background: url("https://img.freepik.com/free-vector/coloured-background-design_1164-221.jpg?w=1480&t=st=1703594323~exp=1703594923~hmac=7f4969d50b83e80593780edd4703e97a87cbddaccbeb20f6de2ac0833e143074") 0 0/ 350px repeat;
   //width: calc(100vw - 150px);
   flex-grow: 1;
   padding: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.8);
+  border-right: none;
+  color: whitesmoke;
 
   &:last-child {
     padding-bottom: 100px;

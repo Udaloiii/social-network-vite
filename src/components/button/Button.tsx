@@ -18,7 +18,8 @@ const StyleButton = styled.button`
   width: max-content;
   position: relative;
   padding: 6px 12px;
-  color: #262626;
+  //color: #262626;
+  color: whitesmoke;
   border: none;
   z-index: 1;
   transition: .2s;
@@ -32,7 +33,7 @@ const StyleButton = styled.button`
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 70%;
+    width: 75%;
     height: 5px;
     background-color: #646cff;
     transition: .3s;
