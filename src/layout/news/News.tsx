@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "@/store/store";
 import {setNewsAC} from "@/store/reducers/news-reducer";
 import {Navigate} from "react-router-dom";
+import background from '../../assets/backgrounds/background-profile.webp'
 
 
 export const News: FC = () => {
@@ -93,8 +94,12 @@ const StyleNews = styled.section`
   position: relative;
   //background-color: #c9ffeb;
   flex-grow: 1;
-
   padding: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.8);
+  border-right: none;
+  border-radius: 6px;
+  background: url(${background}) 0 0/250px repeat;
+  color: whitesmoke;
 
 
   &:last-child {

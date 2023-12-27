@@ -33,7 +33,7 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
 
     return (
         <StylePosts>
-            <FlexWrapper direction={"column"} gap={"25px"}>
+            <FlexWrapper direction={"column"} gap={"40px"}>
                 <AddItemForm addItem={addNewPostHandler} as={"textarea"} placeholder={"create you post"}
                              buttonTitle={"add post"}/>
                 <PostWrap>

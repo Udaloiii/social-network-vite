@@ -10,6 +10,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {setMessagesAC} from "@/store/reducers/messages-reducer";
 import {Loader} from "@/components/loader/Loader";
 import {Navigate} from "react-router-dom";
+import background from '../../../../assets/backgrounds/background-profile.webp'
 
 
 export const MessagesWithBlock: FC = () => {
@@ -83,6 +84,11 @@ const StyleMessages = styled.section`
   flex-grow: 1;
   //width: calc(100vw - 150px);
   padding: 20px;
+  background: url(${background}) 0 0/250px repeat;
+  border: 1px solid rgba(128, 128, 128, 0.8);
+  border-right: none;
+  border-radius: 6px;
+  color: whitesmoke;
 
   &:last-child {
     padding-bottom: 100px;

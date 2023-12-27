@@ -115,8 +115,10 @@ const Arrow = styled.div`
     display: inline-block;
     width: 0.4em;
     height: 0.4em;
-    border-right: 0.12em solid rgba(0, 0, 0, 0.87);
-    border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+    //border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+    //border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+    border-right: 0.12em solid currentColor;
+    border-top: 0.12em solid currentColor;
   }
 `
 
