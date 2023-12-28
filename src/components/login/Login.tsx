@@ -65,9 +65,12 @@ export const Login: FC = () => {
 }
 
 const LoginWrap = styled.div`
-  background: url(${background}) 100% 55%/ cover no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  background: url(${background}) 100% 55%/ cover no-repeat;
 `
 const StyleLogin = styled.div`
   position: absolute;
