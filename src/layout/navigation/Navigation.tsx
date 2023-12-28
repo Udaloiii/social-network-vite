@@ -65,9 +65,7 @@ const StyleLink = styled(NavLink)`
     &::before {
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
-      //border-right: 10px solid rgb(204, 204, 204);
       border-right: 10px solid rgba(255, 255, 255, 0.5);
       transition: .2s ease-in-out;
-    }
   }
 `
