@@ -32,10 +32,7 @@ export const Footer: FC = () => {
 
 const StyleFooter = styled.footer`
   //height: 50px;
-  padding: 20px 0 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 30px 0 10px;
 `
 const SocialList = styled.ul`
   display: flex;
