@@ -15,7 +15,7 @@ const iconsForContacts: IconType[] = [
 export const Footer: FC = () => {
     return (
         <StyleFooter>
-                <FlexWrapper direction={"column"} gap={"20px"} align={"center"}>
+                <FlexWrapper direction={"column"} gap={"10px"} align={"center"}>
                     <SocialList>
                         {iconsForContacts.map(el => <li key={el.id}><
                             Link href={el.href}
@@ -46,16 +46,16 @@ const Link = styled.a`
   border-radius: 50px;
   height: 30px;
   width: 30px;
-  background-color: royalblue;
+  background-color: #4A76A8;
   transition: .2s;
   //color: whitesmoke;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: .2s;
-    background-color: #1448da;
+    background-color: #005dbe;
     color: whitesmoke;
-    box-shadow: 0 0 10px 2px royalblue;
+    box-shadow: 0 0 10px 2px #005dbe;
   }
 
   &:active {
@@ -70,7 +70,7 @@ const Link = styled.a`
 
 const Text = styled.div`
   font-family: Josephine Sans, sans-serif;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(169, 169, 169);
   font-size: 0.8rem;
   user-select: none;
 `
