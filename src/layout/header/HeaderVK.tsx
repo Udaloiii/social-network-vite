@@ -29,7 +29,7 @@ const HeaderStyled = styled.header`
   align-items: center;
   padding: 10px;
   background: #4A76A8;
-  //background: linear-gradient(90deg, #4cbeff, #ffffff);
+  margin-bottom: 14px;
 
   svg {
     width: 33px;
