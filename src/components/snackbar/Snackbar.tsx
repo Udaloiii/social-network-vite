@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {setAppErrorAC} from "@/store/reducers/app-reducer";
 import styled from "styled-components";
+import {Icon} from "@/components/icon/Icon";
 
 
 export const Snackbar = () => {
@@ -26,7 +27,9 @@ export const Snackbar = () => {
         error &&
         <Wrapper>
             <span>{error}</span>
-            <button onClick={onClickHandler}>x</button>
+            <button onClick={onClickHandler}>
+                <Icon iconId={"delete"} vkIcons width="18" height="18" viewBox="0 0 24 24"/>
+            </button>
         </Wrapper>
 
     )
@@ -36,17 +39,27 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 12px 16px;
   gap: 20px;
   position: fixed;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: royalblue;
-  color: #FDD835;
-  padding: 10px 14px;
-  border-radius: 6px;
-  transition: opacity 0.5s ease-in-out;
-  font-size: 1rem;
+  border-radius: 8px;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.8);
+
+  color: #ff3a62;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Roboto, sans-serif;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.2px;
 
   & button {
     width: 20px;
@@ -54,14 +67,14 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     border: none;
-    background-color: #0a4181;
-    color: #FDD835;
+    background-color: transparent;
     border-radius: 30%;
     transition: 0.2s;
     font-size: 1rem;
+    color: whitesmoke;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.6) rotate(90deg);
       transition: 0.2s;
     }
 
