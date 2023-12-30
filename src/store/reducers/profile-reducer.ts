@@ -52,7 +52,6 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
         }
 
         case "ADD-LIKE":
-            // debugger
             return {
                 ...state,
                 posts: state.posts.map(el => el.id === action.postId ? {...el, like: action.newValue} : el)
