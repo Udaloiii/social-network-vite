@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  max-width: 1440px;
+  max-width: 1350px;
   width: 100%;
   //height: 100%;
   margin: 0 auto;
