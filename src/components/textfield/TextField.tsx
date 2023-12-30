@@ -28,8 +28,7 @@ export const TextField: FC<TextFieldType> = ({type, placeholder, name, onChange,
 
 const StyleTextfield = styled.input`
   border: 1px solid #343434;
-  //background-color: #3b3b3b;
-  background: linear-gradient(180deg, #1485e6, #00c2f0, #2ceeb8);
+  background-color: #101010;
   opacity: 0.7;
   transition: .3s;
   outline: none;
@@ -40,6 +39,7 @@ const StyleTextfield = styled.input`
   max-width: 350px;
   //width: 325px;
   resize: none;
+  z-index: 0;
 
   &:focus {
     transform: scale(1.05);
