@@ -10,7 +10,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {setMessagesAC} from "@/store/reducers/messages-reducer";
 import {Loader} from "@/components/loader/Loader";
 import {Navigate} from "react-router-dom";
-import background from '../../../../assets/backgrounds/background-profile.webp'
+import background from '../../assets/backgrounds/background-profile.webp'
 
 
 export const MessagesWithBlock: FC = () => {
