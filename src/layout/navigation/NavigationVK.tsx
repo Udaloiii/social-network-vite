@@ -27,7 +27,6 @@ export const NavigationVK: FC = () => {
 const StyleNavigation = styled.nav`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
   //width: 150px;
   padding: 20px 0;
@@ -40,7 +39,7 @@ const StyleNavigation = styled.nav`
 
 const StyleText = styled.div`
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   align-items: flex-end;
   width: 100px;
   transition: .2s;
@@ -79,13 +78,17 @@ const StyleLink = styled(NavLink)`
   }
 
   &.active {
-    transition: .2s;
+    transition: .3s ease-in-out;
     letter-spacing: 0;
     filter: blur(0);
 
     & ${StyleText} {
-      transform: scale(1.3);
-      letter-spacing: 0;
+      transition: .3s ease-in-out;
+      //transform: scale(1.2);
+      //letter-spacing: 0;
+      letter-spacing: 4px;
+      text-decoration: underline;
+      text-decoration-style: double;
     }
 
 `
