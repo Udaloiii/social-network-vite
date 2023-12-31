@@ -9,12 +9,14 @@ type AddItemFormPropsType = {
     as?: string
     placeholder?: string
     buttonTitle?: string
+    color?: string
 }
 export const AddItemForm: FC<AddItemFormPropsType> = ({
                                                           addItem,
                                                           as,
                                                           placeholder,
-                                                          buttonTitle
+                                                          buttonTitle,
+                                                          color
                                                       }: AddItemFormPropsType) => {
     const [value, setValue] = useState("")
 
@@ -29,7 +31,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = ({
         <StyleAddForm>
             <FlexWrapper direction={"column"} gap={"10px"} justify={"start"} align={"start"}>
                 <TextField type={"text"} placeholder={placeholder} as={as} value={value} onChange={setValue} addItem={addItemHandler}/>
-                <Button text={buttonTitle} addItem={addItemHandler}/>
+                <Button text={buttonTitle} addItem={addItemHandler} color={color}/>
             </FlexWrapper>
         </StyleAddForm>
     )

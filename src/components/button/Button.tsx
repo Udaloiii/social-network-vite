@@ -4,22 +4,22 @@ import {FC} from "react";
 type ButtonType = {
     text?: string
     addItem?: () => void
+    color?: string
 }
-export const Button: FC<ButtonType> = ({text, addItem}: ButtonType) => {
+export const Button: FC<ButtonType> = ({text, addItem, color}: ButtonType) => {
     return (
-        <StyleButton onClick={addItem}>
+        <StyleButton onClick={addItem} color={color ? color : "white"}>
             {text}
         </StyleButton>
     )
 }
 
-const StyleButton = styled.button`
+const StyleButton = styled.button<{ color: string }>`
   height: max-content;
   width: max-content;
   position: relative;
   padding: 6px 12px;
-  //color: #262626;
-  color: whitesmoke;
+  color: ${props => props.color};
   border: none;
   z-index: 1;
   transition: .2s;
@@ -42,6 +42,7 @@ const StyleButton = styled.button`
 
   &:hover {
     color: whitesmoke;
+
     &::before {
       width: 100%;
       height: 100%;
