@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {useState} from "react";
+import {AnimatePresence, motion} from "framer-motion";
 
 const arrOfImg = [
     "https://img.freepik.com/free-photo/fantastic-wonderland-forest-landscape-with-mushrooms-flowers-ai-generative_157027-1749.jpg?w=2000&t=st=1703941642~exp=1703942242~hmac=baec01ea8e8620c9a3fc19d12d420f6db87267fcf09a2ae9c6dfe9e902ae80c0",
@@ -23,15 +24,17 @@ export const PhotoFeed = () => {
                 {arrOfImg.map((img, index) => <StyleImg key={index} src={img} alt={""}
                                                         onClick={() => setSelectedImg(img)}/>)}
             </ImagesWrap>
-            {selectedImg && (
-                <Modal>
+            <AnimatePresence>{selectedImg && (
+                <Modal initial={{opacity: 0}}
+                       animate={{opacity: 1, transition: {delay: 0.2, duration: 0.5}}}
+                       exit={{opacity: 0}}>
                     <img
                         src={selectedImg ? selectedImg : ""}
-                        alt="Описание изображения"
+                        alt="image"
                         onClick={() => setSelectedImg(null)}
                     />
                 </Modal>
-            )}
+            )}</AnimatePresence>
         </Wrap>
     )
 }
@@ -52,7 +55,7 @@ const StyleImg = styled.img`
   cursor: pointer;
 `
 
-const Modal = styled.div`
+const Modal = styled(motion.div)`
   width: 1000px;
   height: 600px;
   position: fixed;
