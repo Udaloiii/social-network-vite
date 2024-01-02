@@ -1,4 +1,4 @@
-import {UserType} from "@/api/users-api";
+import {usersApi, UserType} from "@/api/users-api";
 import logo1 from "../../assets/avatars/9434726.webp";
 import logo2 from "../../assets/avatars/9434650.webp";
 import logo3 from "../../assets/avatars/9434619.webp";
@@ -21,6 +21,8 @@ import logo19 from "../../assets/avatars/9439767.webp";
 import logo20 from "../../assets/avatars/9439726.webp";
 import {formattedDate} from "@/utils/getDate";
 import {addLikeAC} from "@/store/reducers/profile-reducer";
+import {Dispatch} from "redux";
+import {setAppErrorAC, setAppStatusAC} from "@/store/reducers/app-reducer";
 
 export const myPosts: PostType[] = [
     {
@@ -177,7 +179,7 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
                             text: "Hello world!",
                             icon: randomLogo,
                             like: false,
-                            postTime:"",
+                            postTime: "",
                             postDate: timestamps[condition]
                         }], city: city,
                         country: country,
@@ -219,7 +221,10 @@ export const usersReducer = (state = initialState, action: ActionType): UsersSta
         case "ADD-LIKE":
             return {
                 ...state,
-                items: state.items.map(el => el.id === action.userId ? {...el, posts: el.posts.map(el=> el.id === action.postId? {...el, like:action.newValue}: el)} : el)
+                items: state.items.map(el => el.id === action.userId ? {
+                    ...el,
+                    posts: el.posts.map(el => el.id === action.postId ? {...el, like: action.newValue} : el)
+                } : el)
             }
 
         default:
@@ -242,4 +247,21 @@ export const changePageSizeAC = (pageSize: number) => {
 
 export const addPostAC = (id: number, text: string, postTime: string) => {
     return {type: "ADD-POST", id, text, postTime} as const
+}
+
+// Thunks
+
+export const getUsersTC = (pageSize: number, currentPage: number) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    usersApi.getUsers(pageSize, currentPage)
+        .then(res => {
+                if (!res.data.error) {
+                    dispatch(setUsersAC((res.data.items)))
+                    dispatch(setUsersCountAC((res.data.totalCount)))
+                } else {
+                    dispatch(setAppErrorAC("user not found"))
+                    // handleAppError(res.data,dispatch)
+                }
+            }
+        )
 }
