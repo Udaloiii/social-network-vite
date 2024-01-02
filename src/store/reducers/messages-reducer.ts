@@ -16,7 +16,7 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
         case "ADD-MESSAGE": {
             const newMessage: MessageStateType = {
                 id: action.id,
-                name: "Username",
+                name: action.name,
                 body: action.text,
                 messageTime: action.messageTime,
                 messageId: action.messageId
@@ -35,6 +35,6 @@ export const setMessagesAC = (messages: MessagesType[]) => {
     return {type: "SET-MESSAGES", messages} as const
 }
 
-export const addMessageAC = (id: number, messageId: number, text: string, messageTime: string) => {
-    return {type: "ADD-MESSAGE", id, text, messageId, messageTime} as const
+export const addMessageAC = (id: number,name: string, messageId: number, text: string, messageTime: string) => {
+    return {type: "ADD-MESSAGE", id, text,name,  messageId, messageTime} as const
 }
