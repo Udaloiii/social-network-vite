@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
+import {Icon} from "@/components/icon/Icon";
 
 const arrOfImg = [
     "https://img.freepik.com/free-photo/fantastic-wonderland-forest-landscape-with-mushrooms-flowers-ai-generative_157027-1749.jpg?w=2000&t=st=1703941642~exp=1703942242~hmac=baec01ea8e8620c9a3fc19d12d420f6db87267fcf09a2ae9c6dfe9e902ae80c0",
@@ -12,6 +13,8 @@ const arrOfImg = [
 export const PhotoFeed = () => {
     const [selectedImg, setSelectedImg] = useState<null | string>(null);
 
+    const handlerSwitcherUp = () => setSelectedImg(arrOfImg[arrOfImg.indexOf(selectedImg || "") + 1])
+    const handlerSwitcherDown = () => setSelectedImg(arrOfImg[arrOfImg.indexOf(selectedImg || "") - 1])
     return (
         <Wrap>
             <DescriptionWrap>
@@ -25,14 +28,25 @@ export const PhotoFeed = () => {
                                                         onClick={() => setSelectedImg(img)}/>)}
             </ImagesWrap>
             <AnimatePresence>{selectedImg && (
-                <Modal initial={{opacity: 0}}
-                       animate={{opacity: 1, transition: {delay: 0.2, duration: 0.5}}}
-                       exit={{opacity: 0}}>
-                    <img
-                        src={selectedImg ? selectedImg : ""}
-                        alt="image"
-                        onClick={() => setSelectedImg(null)}
-                    />
+                <Modal
+                    initial={{opacity: 0, scale: 0.2}}
+                    animate={{opacity: 1, scale: 1}}
+                    transition={{duration: 0.3}}
+                    exit={{opacity: 0, scale: 0.2}}
+                >
+                    <ButtonClosed onClick={() => setSelectedImg(null)}> <Icon iconId={"delete"} vkIcons width="18"
+                                                                              height="18"
+                                                                              viewBox="0 0 24 24"/></ButtonClosed>
+                    <ImgWrap>
+                        <button disabled={selectedImg === arrOfImg[0]} onClick={handlerSwitcherDown}>{"<"}</button>
+                        <img
+                            src={selectedImg ? selectedImg : ""}
+                            alt="image"
+                            onClick={() => setSelectedImg(null)}
+                        />
+                        <button disabled={selectedImg === arrOfImg[arrOfImg.length - 1]}
+                                onClick={handlerSwitcherUp}>{">"}</button>
+                    </ImgWrap>
                 </Modal>
             )}</AnimatePresence>
         </Wrap>
@@ -56,13 +70,10 @@ const StyleImg = styled.img`
 `
 
 const Modal = styled(motion.div)`
-  width: 1000px;
-  height: 600px;
+  //width: 1000px;
+  //height: 600px;
   position: fixed;
   top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: .5s ease-in-out;
   z-index: 10;
   box-shadow: 0 5px 20px 10px #ffffff;
   border-radius: 12px;
@@ -74,6 +85,37 @@ const Modal = styled(motion.div)`
     border-radius: 12px;
   }
 `
+const ButtonClosed = styled.button`
+  position: absolute;
+  top: -30px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  border-radius: 30%;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #2a2a2a;
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  &:hover {
+    transform: scale(1.6) rotate(90deg);
+    transition: 0.2s;
+  }
+
+  &:active {
+    transform: scale(0.9);
+    transition: 0.1s;
+  }
+`
+
+
 const DescriptionWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -112,4 +154,31 @@ const Text = styled.span`
   font-weight: 400;
   line-height: 20px; /* 153.846% */
   letter-spacing: -0.2px;
+`
+
+const ImgWrap = styled.div`
+  display: flex;
+
+  img {
+    //position: relative;
+  }
+
+  button {
+    align-self: center;
+    padding: 5px 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 3rem;
+    color: royalblue;
+    
+    &:active {
+      transform: scale(0.9);
+      transition: .3s;
+    }
+    &:disabled {
+      font-size: 2rem;
+      color: grey;
+      transform: scale(1);
+    }
+  }
 `
