@@ -75,7 +75,6 @@ const Modal = styled(motion.div)`
   position: fixed;
   top: 10%;
   z-index: 10;
-  box-shadow: 0 5px 20px 10px #ffffff;
   border-radius: 12px;
 
   img {
@@ -83,6 +82,7 @@ const Modal = styled(motion.div)`
     height: 600px;
     object-fit: cover;
     border-radius: 12px;
+    box-shadow: 0 5px 10px 5px #ffffff;
   }
 `
 const ButtonClosed = styled.button`
@@ -158,11 +158,7 @@ const Text = styled.span`
 
 const ImgWrap = styled.div`
   display: flex;
-
-  img {
-    //position: relative;
-  }
-
+  
   button {
     align-self: center;
     padding: 5px 10px;
@@ -170,11 +166,12 @@ const ImgWrap = styled.div`
     border: none;
     font-size: 3rem;
     color: royalblue;
-    
+
     &:active {
       transform: scale(0.9);
       transition: .3s;
     }
+
     &:disabled {
       font-size: 2rem;
       color: grey;
