@@ -2,13 +2,14 @@ import styled from "styled-components";
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Icon} from "@/components/icon/Icon";
+import photo1 from "../../../assets/photoFeed/wonderland-forest-with-mushrooms.webp"
+import photo2 from "../../../assets/photoFeed/woman-eating-apple.webp"
+import photo3 from "../../../assets/photoFeed/mountains-cloudy-sky.webp"
+import photo4 from "../../../assets/photoFeed/skateboarder-doing-trick.webp"
+import photo5 from "../../../assets/photoFeed/underwater-world-with-corals.webp"
 
 const arrOfImg = [
-    "https://img.freepik.com/free-photo/fantastic-wonderland-forest-landscape-with-mushrooms-flowers-ai-generative_157027-1749.jpg?w=2000&t=st=1703941642~exp=1703942242~hmac=baec01ea8e8620c9a3fc19d12d420f6db87267fcf09a2ae9c6dfe9e902ae80c0",
-    "https://img.freepik.com/free-photo/woman-eating-red-apple-sunlight_23-2147907104.jpg?w=2000&t=st=1703941909~exp=1703942509~hmac=3a8257abd24a021870d7ee30a763b876f50a29995ecac9305b1e4d3abe56432b",
-    "https://img.freepik.com/free-photo/breathtaking-view-snowy-mountains-cloudy-sky-patagonia-chile_181624-9696.jpg?w=2000&t=st=1703941993~exp=1703942593~hmac=bd806f9962442cc71b0fcc627e41f67ec1b7b5757f735ffa0b3b2d936f608717",
-    "https://img.freepik.com/free-photo/skateboarder-doing-trick-city-s-street-sunshine_155003-44682.jpg?w=2000&t=st=1703942069~exp=1703942669~hmac=8feb59515af16c5e8ad6739fcb54b859126e75d622365cadf1ab67b7e9ac5aca",
-    "https://img.freepik.com/free-photo/underwater-world-with-fish-corals-generative-ai_169016-30520.jpg?w=2000&t=st=1703942106~exp=1703942706~hmac=e102b11cb8cb25140832acbab11dba6a4e669c3d27bf9a62d518d834e589fac3"
+    photo1, photo2, photo3, photo4, photo5
 ]
 export const PhotoFeed = () => {
     const [selectedImg, setSelectedImg] = useState<null | string>(null);
@@ -33,20 +34,20 @@ export const PhotoFeed = () => {
                     animate={{opacity: 1, scale: 1}}
                     transition={{duration: 0.3}}
                     exit={{opacity: 0, scale: 0.2}}
+                    img={selectedImg}
                 >
-                    <ButtonClosed onClick={() => setSelectedImg(null)}> <Icon iconId={"delete"} vkIcons width="18"
-                                                                              height="18"
-                                                                              viewBox="0 0 24 24"/></ButtonClosed>
-                    <ImgWrap>
-                        <button disabled={selectedImg === arrOfImg[0]} onClick={handlerSwitcherDown}>{"<"}</button>
-                        <img
-                            src={selectedImg ? selectedImg : ""}
-                            alt="image"
-                            onClick={() => setSelectedImg(null)}
-                        />
-                        <button disabled={selectedImg === arrOfImg[arrOfImg.length - 1]}
-                                onClick={handlerSwitcherUp}>{">"}</button>
-                    </ImgWrap>
+                    <ButtonClosed onClick={() => setSelectedImg(null)}>
+                        <Icon iconId={"delete"} vkIcons width="18"
+                              height="18"
+                              viewBox="0 0 24 24"/>
+                    </ButtonClosed>
+                    <StyleButton disabled={selectedImg === arrOfImg[0]} onClick={handlerSwitcherDown} position={"left"}>
+                        <Icon iconId={"left"} vkIcons width="34" height="34" viewBox="0 0 48 48"/>
+                    </StyleButton>
+                    <StyleButton disabled={selectedImg === arrOfImg[arrOfImg.length - 1]}
+                                 onClick={handlerSwitcherUp} position={"right"}>
+                        <Icon iconId={"right"} vkIcons width="34" height="34" viewBox="0 0 48 48"/>
+                    </StyleButton>
                 </Modal>
             )}</AnimatePresence>
         </Wrap>
@@ -69,26 +70,20 @@ const StyleImg = styled.img`
   cursor: pointer;
 `
 
-const Modal = styled(motion.div)`
-  //width: 1000px;
-  //height: 600px;
+const Modal = styled(motion.div)<{ img: string }>`
+  width: 1000px;
+  height: 600px;
   position: fixed;
   top: 10%;
   z-index: 10;
   border-radius: 12px;
-
-  img {
-    width: 1000px;
-    height: 600px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px 5px #ffffff;
-  }
+  box-shadow: 0 5px 10px 5px #ffffff;
+  background: url(${props => props.img || ""}) 0 0 / cover;
 `
 const ButtonClosed = styled.button`
   position: absolute;
   top: -30px;
-  right: -5px;
+  right: -40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,6 +107,30 @@ const ButtonClosed = styled.button`
   &:active {
     transform: scale(0.9);
     transition: 0.1s;
+  }
+`
+const StyleButton = styled.button<{ position: string }>`
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: ${props => props.position === "left" ? "" : "0"};
+  background-color: transparent;
+  border: none;
+  color: #4a76a8;
+
+  &:active {
+    top: 50%;
+    transform: scale(0.97) translateY(-50%);
+    transition: .3s;
+  }
+
+  &:disabled {
+    color: #edfff8;
+    opacity: 0.3;
+    top: 50%;
+    transform: scale(1) translateY(-50%);
   }
 `
 
@@ -156,26 +175,3 @@ const Text = styled.span`
   letter-spacing: -0.2px;
 `
 
-const ImgWrap = styled.div`
-  display: flex;
-  
-  button {
-    align-self: center;
-    padding: 5px 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 3rem;
-    color: royalblue;
-
-    &:active {
-      transform: scale(0.9);
-      transition: .3s;
-    }
-
-    &:disabled {
-      font-size: 2rem;
-      color: grey;
-      transform: scale(1);
-    }
-  }
-`
