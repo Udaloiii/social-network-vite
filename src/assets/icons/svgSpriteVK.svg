@@ -69,4 +69,21 @@
                   d="M4 8V6.5c0-.943 0-1.414.293-1.707C4.586 4.5 5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293C10 5.086 10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/>
         </g>
     </g>
+
+    <!--    icons for PhotoFeed-->
+    <g id="left">
+        <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/>
+            <path stroke-linecap="round" d="m27 33l-9-9l9-9"/>
+        </g>
+    </g>
+
+    <g id="right">
+        <g transform="rotate(180 24 24)">
+            <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+                <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/>
+                <path stroke-linecap="round" d="m27 33l-9-9l9-9"/>
+            </g>
+        </g>
+    </g>
 </svg>
