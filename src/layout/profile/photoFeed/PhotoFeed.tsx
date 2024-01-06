@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useState} from "react";
+import {FC, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {Icon} from "@/components/icon/Icon";
 import photo1 from "../../../assets/photoFeed/wonderland-forest-with-mushrooms.webp"
@@ -11,7 +11,7 @@ import photo5 from "../../../assets/photoFeed/underwater-world-with-corals.webp"
 const arrOfImg = [
     photo1, photo2, photo3, photo4, photo5
 ]
-export const PhotoFeed = () => {
+export const PhotoFeed:FC = () => {
     const [selectedImg, setSelectedImg] = useState<null | string>(null);
 
     const handlerSwitcherUp = () => setSelectedImg(arrOfImg[arrOfImg.indexOf(selectedImg || "") + 1])
@@ -130,7 +130,7 @@ const StyleButton = styled.button<{ position: string }>`
     color: #edfff8;
     opacity: 0.3;
     top: 50%;
-    transform: scale(1) translateY(-50%);
+    transform: scale(0.9) translateY(-50%);
   }
 `
 
@@ -150,7 +150,7 @@ const Description = styled.span`
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 153.846% */
+  line-height: 20px;
   letter-spacing: -0.3px;
 `
 const Count = styled.span`
@@ -161,7 +161,7 @@ const Count = styled.span`
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 153.846% */
+  line-height: 20px;
   letter-spacing: -0.5px;
 `
 const Text = styled.span`
@@ -171,7 +171,7 @@ const Text = styled.span`
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 153.846% */
+  line-height: 20px;
   letter-spacing: -0.2px;
 `
 

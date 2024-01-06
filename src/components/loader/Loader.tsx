@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {FC} from "react";
 
-export const Loader = () => {
+export const Loader: FC = () => {
     return (
         <LoaderWrapper>
             <StyleLoader>
