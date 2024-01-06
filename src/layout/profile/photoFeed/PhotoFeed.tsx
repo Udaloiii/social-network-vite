@@ -11,7 +11,7 @@ import photo5 from "../../../assets/photoFeed/underwater-world-with-corals.webp"
 const arrOfImg = [
     photo1, photo2, photo3, photo4, photo5
 ]
-export const PhotoFeed:FC = () => {
+export const PhotoFeed: FC = () => {
     const [selectedImg, setSelectedImg] = useState<null | string>(null);
 
     const handlerSwitcherUp = () => setSelectedImg(arrOfImg[arrOfImg.indexOf(selectedImg || "") + 1])
@@ -19,10 +19,10 @@ export const PhotoFeed:FC = () => {
     return (
         <Wrap>
             <DescriptionWrap>
-                <div><Description>Мои фотографии</Description>
+                <div><Description>My photos</Description>
                     <Count>77</Count>
                 </div>
-                <Text>показать на карте </Text>
+                <Text>Show on the map</Text>
             </DescriptionWrap>
             <ImagesWrap>
                 {arrOfImg.map((img, index) => <StyleImg key={index} src={img} alt={""}
