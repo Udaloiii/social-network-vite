@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {setAppErrorAC} from "@/store/reducers/app-reducer";
@@ -6,7 +6,7 @@ import styled from "styled-components";
 import {Icon} from "@/components/icon/Icon";
 
 
-export const Snackbar = () => {
+export const Snackbar:FC = () => {
     const error = useSelector<AppStateType, string | null>(state => state.app.error)
     const dispatch = useAppDispatch()
 

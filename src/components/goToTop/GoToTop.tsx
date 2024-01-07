@@ -55,7 +55,6 @@ const Button = styled.button`
 
     &:active {
       box-shadow: 0 0 6px 1px black;
-      color: royalblue;
       transition: .2s;
     }
   }
