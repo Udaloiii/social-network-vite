@@ -9,8 +9,6 @@ import {useEffect} from "react";
 import {authMeTC} from "@/store/reducers/auth-reducer";
 import {Loader} from "@/components/loader/Loader";
 import {GoToTop} from "@/components/goToTop/GoToTop";
-import {NavigationVK} from "@/layout/navigation/NavigationVK";
-import {HeaderVK} from "@/layout/header/HeaderVK";
 import {Container} from "@/components/container/Container";
 import {Snackbar} from "@/components/snackbar/Snackbar";
 import {ProfileVK} from "@/layout/profile/ProfileVK";
@@ -18,6 +16,8 @@ import {MessagesWithBlockVK} from "@/layout/messages/MessagesWithBlockVK";
 import {MessageVK} from "@/layout/messages/message/proba/MessageVK";
 import {UsersVK} from "@/layout/users/UsersVK";
 import {NewsVK} from "@/layout/news/NewsVK";
+import {Navigation} from "@/layout/navigation/Navigation";
+import {Header} from "@/layout/header/Header";
 
 
 function App() {
@@ -40,10 +40,10 @@ function App() {
     }
     return (
         <div style={{background: "#EDEEF0"}}>
-            {isLoggedIn && <HeaderVK/>}
+            {isLoggedIn && <Header/>}
             <Container>
                 <FlexWrapper >
-                {isLoggedIn && <NavigationVK/>}
+                {isLoggedIn && <Navigation/>}
                 <Snackbar/>
                 <GoToTop/>
                 <Routes>
