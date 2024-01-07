@@ -1,17 +1,24 @@
 import {FC} from "react";
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
+import {Icon} from "@/components/icon/Icon";
 
 export const Navigation: FC = () => {
     return (
         <StyleNavigation>
-            <StyleLink to='/profile'>Profile
+            <StyleLink to='/profile'>
+                <Icon iconId={"mypage"} vkIcons/>
+                <StyleText>Profile</StyleText>
             </StyleLink>
-            <StyleLink to='/users'>Friends
-            </StyleLink>
-            <StyleLink to='/messages'>Messages
-            </StyleLink>
-            <StyleLink to='/news'>News
+            <StyleLink to='/users'>
+                <Icon iconId={"friends"} vkIcons/>
+                <StyleText>Friends</StyleText></StyleLink>
+            <StyleLink to='/messages'>
+                <Icon iconId={"messages"} vkIcons/>
+                <StyleText>Messages</StyleText></StyleLink>
+            <StyleLink to='/news'>
+                <Icon iconId={"news"} vkIcons/>
+                <StyleText>News</StyleText>
             </StyleLink>
         </StyleNavigation>
     )
@@ -20,52 +27,76 @@ export const Navigation: FC = () => {
 const StyleNavigation = styled.nav`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
-  width: 150px;
-  padding-top: 20px;
-  //background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
+  padding: 20px 0;
   min-height: calc(100vh - 110px);
   font-family: "Rubik Doodle Shadow", sans-serif;
   font-size: 1.1rem;
+
 `
-const StyleLink = styled(NavLink)`
+
+const StyleText = styled.span`
   position: relative;
-  width: 100px;
   display: flex;
-  justify-content: center;
-  transition: .2s;
-  user-select: none;
-  color: whitesmoke;
-  text-shadow: 1px 1px 1px black;
+  align-items: flex-end;
+  width: max-content;
+  padding-top: 2px;
+  transition: .3s ease-in-out;
 
   &::before {
     content: "";
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -8px;
+    bottom: 0;
+    left: 0;
     width: 0;
-    height: 0;
+    height: 3px;
+    background-color: #4A76A8;
+    border-radius: 5px;
+    transition: .3s ease-in-out;
   }
 
   &:hover {
-    transition: .3s;
-    color: cornflowerblue;
     letter-spacing: 1px;
+  }
+`
+const StyleLink = styled(NavLink)`
+  width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  transition: .2s;
+  user-select: none;
+  color: rgba(42, 88, 133, 1);
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px;
+  filter: blur(1px);
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  &:hover {
+    transition: .2s;
+    filter: blur(0);
   }
 
   &.active {
-    color: royalblue;
-    transition: .1s;
-    transform: scale(1.3);
+    transition: .3s ease-in-out;
     letter-spacing: 0;
-    text-shadow: 1px 1px 1px black;
+    filter: blur(0);
 
-    &::before {
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-right: 10px solid rgba(255, 255, 255, 0.5);
-      transition: .2s ease-in-out;
+    & ${StyleText} {
+      transition: .3s ease-in-out;
+      letter-spacing: 4px;
+
+      &::before {
+        width: 100%;
+      }
+    }
   }
 `
