@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import styled from "styled-components";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
@@ -9,6 +9,7 @@ import {AppStateType, useAppDispatch} from "@/store/store";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import background from '../../assets/backgrounds/background-login.webp'
+import {Icon} from "@/components/icon/Icon";
 
 
 const loginSchema = z.object({
@@ -18,6 +19,7 @@ const loginSchema = z.object({
 })
 // export type FormValues = z.infer<typeof loginSchema>
 export const Login: FC = () => {
+    const [show, setShow] = useState(false)
     const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const {register, handleSubmit, formState: {errors}, reset} = useForm<LoginRequestType>({
@@ -44,7 +46,13 @@ export const Login: FC = () => {
                         <ErrorMessage>{errors.email?.message}</ErrorMessage>
                     </UserBox>
                     <UserBox>
-                        <StyleInput {...register('password')} type={"password"} required/>
+                        <StyleInput {...register('password')} type={show ? "text" : "password"} required/>
+                        {show ? <Icon iconId={"noSee"} width={"20px"} height={"20px"}
+                                      viewBox={"0 0 20 20"}
+                                      onClick={() => setShow(prevState => !prevState)}/> :
+                            <Icon iconId={"see"} width={"20px"} height={"20px"}
+                                  viewBox={"0 0 24 24"}
+                                  onClick={() => setShow(prevState => !prevState)}/>}
                         <StyleLabel>Password</StyleLabel>
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </UserBox>
@@ -102,6 +110,22 @@ const StyleForm = styled.form`
 
 const UserBox = styled.div`
   position: relative;
+  display: flex;
+
+  svg {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    color: royalblue;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: .1s;
+
+    :active {
+      transform: scale(0.9);
+      transition: .1s;
+    }
+  }
 `
 
 const StyleInput = styled.input`
