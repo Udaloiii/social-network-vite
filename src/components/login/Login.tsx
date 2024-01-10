@@ -210,6 +210,11 @@ const StyleButton = styled.button`
       animation: btn-anim1 2s linear infinite;
     }
   }
+  
+  &:focus {
+    box-shadow: 0 0 5px 2px rgb(65, 105, 225);
+    transition: border-color 0.3s;
+  }
 `
 
 const CheckboxWrapper = styled.div`
@@ -218,8 +223,14 @@ const CheckboxWrapper = styled.div`
 
   & input {
     width: 20px;
+    height: 20px;
     border: none;
-    outline: transparent;
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 7px 5px rgba(65, 105, 225, 0.5);
+      transition: border-color 0.3s;
+    }
   }
 
   & label {
