@@ -47,11 +47,11 @@ const StyleText = styled.span`
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -5px;
     width: 0;
-    height: 3px;
-    background-color: #4A76A8;
-    border-radius: 5px;
+    height: 100%;
+    background-color: rgba(74, 118, 168, 0.5);
+    border-radius: 8px;
     transition: .3s ease-in-out;
   }
 
@@ -95,7 +95,7 @@ const StyleLink = styled(NavLink)`
       letter-spacing: 4px;
 
       &::before {
-        width: 100%;
+        width: 130px;
       }
     }
   }
