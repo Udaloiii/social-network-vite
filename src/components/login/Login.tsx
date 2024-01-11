@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import background from '../../assets/backgrounds/background-login.webp'
 import {Icon} from "@/components/icon/Icon";
+import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 
 
 const loginSchema = z.object({
@@ -67,6 +68,13 @@ export const Login: FC = () => {
                         </StyleButton>
                     </center>
                 </StyleForm>
+                <p>
+                    Don't have an account? Use a free:
+                </p>
+                <FlexWrapper direction={"column"} gap={"5px"}>
+                    <span>Email: <span>free@samuraijs.com</span></span>
+                    <span>Password: <span>free</span></span>
+                </FlexWrapper>
             </StyleLogin>
         </LoginWrap>
     )
@@ -91,6 +99,27 @@ const StyleLogin = styled.div`
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
+
+  p {
+    font-family: Josephin Sans, sans-serif;
+    margin-top: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+
+
+  ${FlexWrapper} {
+    margin-top: 5px;
+    color: rgba(65, 105, 225, 0.4);
+    font-size: 0.9rem;
+
+    span {
+      :nth-child(1) {
+        color: rgba(128, 128, 128, 0.5);
+        font-size: 0.8rem;
+      }
+    }
+  }
 
   @keyframes btn-anim1 {
     0% {
