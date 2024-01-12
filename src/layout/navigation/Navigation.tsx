@@ -46,13 +46,16 @@ const StyleText = styled.span`
   &::before {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     left: -5px;
     width: 0;
-    height: 100%;
-    background-color: rgba(74, 118, 168, 0.5);
+    height: 40px;
+    //background-color: rgba(74, 118, 168, 0.5);
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 5px 5px rgba(74, 118, 168, 0.5);
     border-radius: 8px;
     transition: .3s ease-in-out;
+    z-index: -1;
   }
 
   &:hover {
@@ -95,7 +98,7 @@ const StyleLink = styled(NavLink)`
       letter-spacing: 4px;
 
       &::before {
-        width: 130px;
+        width: 140px;
       }
     }
   }
