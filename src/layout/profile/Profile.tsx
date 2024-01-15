@@ -30,7 +30,7 @@ export const Profile: FC = () => {
     useEffect(() => {
         dispatch(getProfileTC(id, image))
         // }, [profile.userId, dispatch, id, image, userId, profile.fullName]);
-    }, [dispatch, id]);
+    }, [dispatch, id, image]);
 
     if (!isInitialized) {
         return <Navigate to={'/login'}/>
