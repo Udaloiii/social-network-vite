@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import {FC, useEffect} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
-import {UserInfo} from "@/layout/profile/userInfo/UserInfo";
-import {Posts} from "@/layout/profile/posts/Posts";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {getProfileTC, ProfileType} from "@/store/reducers/profile-reducer";
@@ -10,8 +8,10 @@ import {Navigate, useParams} from "react-router-dom";
 import {UserItemType} from "@/store/reducers/users-reducer";
 import {Loader} from "@/components/loader/Loader";
 import userAvatar from '../../assets/avatars/user.webp'
-import background from '../../assets/backgrounds/background-profile.webp'
 import {RequestStatusType} from "@/store/reducers/app-reducer";
+import {UserInfoVK} from "@/layout/profile/userInfo/UserInfoVK";
+import {PostsVK} from "@/layout/profile/posts/PostsVK";
+import {PhotoFeed} from "@/layout/profile/photoFeed/PhotoFeed";
 
 
 export const Profile: FC = () => {
@@ -29,7 +29,7 @@ export const Profile: FC = () => {
 
     useEffect(() => {
         dispatch(getProfileTC(id, image))
-    // }, [profile.userId, dispatch, id, image, userId, profile.fullName]);
+        // }, [profile.userId, dispatch, id, image, userId, profile.fullName]);
     }, [dispatch, id]);
 
     if (!isInitialized) {
@@ -38,50 +38,40 @@ export const Profile: FC = () => {
 
     return (
         <StyleProfile>
-            {/*{profile.fullName ?*/}
-            {isLoading === "loading" ? <Loader/>
-                : <ProfileWrapper>
-                    <FlexWrapper gap={"50px"}>
-                        <StyleProfileImage
-                            src={image}
-                        />
-                        <UserInfo
+            <ProfileWrapper>
+                {/*{isLoading === "loading" ? <Loader/>*/}
+                {/*    : <>*/}
+                <FlexWrapper gap={"50px"}>
+                    {isLoading === "loading" ? <Loader/>
+                        :
+                        <UserInfoVK
                             user={user?.filter(el => el.id === id)[0]}
                             profile={profile}
-                        />
-                    </FlexWrapper>
-                    <Posts userId={id} posts={posts}/>
-                </ProfileWrapper>
-            }
+                            image={image}
+                        />}
+                </FlexWrapper>
+                <PhotoFeed/>
+                <PostsVK userId={id} posts={posts}/>
+                {/*</>*/}
+                {/*    }*/}
+            </ProfileWrapper>
+
 
         </StyleProfile>
     )
 }
 
 const StyleProfile = styled.section`
-    //background: url(${background}) 0 0/350px repeat;
-  //background: linear-gradient(180deg, #1485e6, #00c2f0, #2ceeb8);
   flex-grow: 1;
-  //width: calc(100vw - 150px);
-  background: url(${background}) 0 0/ 350px repeat;
-  border: 1px solid rgba(128, 128, 128, 0.8);
-  border-right: none;
-  border-radius: 6px;
+  border-radius: 12px;
 `
 const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 100px;
-  padding: 20px;
+  gap: 20px;
+  //padding: 20px;
 
   textarea {
     width: 325px;
   }
-`
-const StyleProfileImage = styled.img`
-  max-width: 325px;
-  max-height: 290px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `
