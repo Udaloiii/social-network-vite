@@ -29,7 +29,6 @@ export const Profile: FC = () => {
 
     useEffect(() => {
         dispatch(getProfileTC(id, image))
-        // }, [profile.userId, dispatch, id, image, userId, profile.fullName]);
     }, [dispatch, id, image]);
 
     if (!isInitialized) {
@@ -39,8 +38,6 @@ export const Profile: FC = () => {
     return (
         <StyleProfile>
             <ProfileWrapper>
-                {/*{isLoading === "loading" ? <Loader/>*/}
-                {/*    : <>*/}
                 <FlexWrapper gap={"50px"}>
                     {isLoading === "loading" ? <Loader/>
                         :
@@ -52,8 +49,6 @@ export const Profile: FC = () => {
                 </FlexWrapper>
                 <PhotoFeed/>
                 <PostsVK userId={id} posts={posts}/>
-                {/*</>*/}
-                {/*    }*/}
             </ProfileWrapper>
 
 
@@ -69,7 +64,6 @@ const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  //padding: 20px;
 
   textarea {
     width: 325px;
