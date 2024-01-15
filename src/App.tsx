@@ -11,13 +11,13 @@ import {Loader} from "@/components/loader/Loader";
 import {GoToTop} from "@/components/goToTop/GoToTop";
 import {Container} from "@/components/container/Container";
 import {Snackbar} from "@/components/snackbar/Snackbar";
-import {ProfileVK} from "@/layout/profile/ProfileVK";
 import {MessagesWithBlockVK} from "@/layout/messages/MessagesWithBlockVK";
 import {MessageVK} from "@/layout/messages/message/proba/MessageVK";
-import {UsersVK} from "@/layout/users/UsersVK";
 import {NewsVK} from "@/layout/news/NewsVK";
 import {Navigation} from "@/layout/navigation/Navigation";
 import {Header} from "@/layout/header/Header";
+import {Profile} from "@/layout/profile/Profile";
+import {Users} from "@/layout/users/Users";
 
 
 function App() {
@@ -42,28 +42,27 @@ function App() {
         <div style={{background: "#EDEEF0"}}>
             {isLoggedIn && <Header/>}
             <Container>
-                <FlexWrapper >
-                {isLoggedIn && <Navigation/>}
-                <Snackbar/>
-                <GoToTop/>
-                <Routes>
-                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
-                    <Route path={'/profile'} element={<ProfileVK/>}/>
-                    {/*<Route path={'/users'} element={<Users/>}/>*/}
-                    <Route path={'/users'} element={<UsersVK/>}/>
-                    {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
-                    <Route path={'/users/:id'} element={<ProfileVK/>}/>
-                    {/*<Route path={'/messages'} element={<MessagesWithBlock/>}/>*/}
-                    <Route path={'/messages'} element={<MessagesWithBlockVK/>}/>
-                    {/*<Route path={'/messages/:id'} element={<Message/>}/>*/}
-                    <Route path={'/messages/:id'} element={<MessageVK/>}/>
-                    {/*<Route path={'/news'} element={<News/>}/>*/}
-                    <Route path={'/news'} element={<NewsVK/>}/>
-                    <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/404'} element={<PageError/>}/>
-                    <Route path={'*'} element={<Navigate to={'/404'}/>}/>
-                </Routes>
-            </FlexWrapper></Container>
+                <FlexWrapper>
+                    {isLoggedIn && <Navigation/>}
+                    <Snackbar/>
+                    <GoToTop/>
+                    <Routes>
+                        <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                        <Route path={'/profile'} element={<Profile/>}/>
+                        <Route path={'/users'} element={<Users/>}/>
+                        {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
+                        <Route path={'/users/:id'} element={<Profile/>}/>
+                        {/*<Route path={'/messages'} element={<MessagesWithBlock/>}/>*/}
+                        <Route path={'/messages'} element={<MessagesWithBlockVK/>}/>
+                        {/*<Route path={'/messages/:id'} element={<Message/>}/>*/}
+                        <Route path={'/messages/:id'} element={<MessageVK/>}/>
+                        {/*<Route path={'/news'} element={<News/>}/>*/}
+                        <Route path={'/news'} element={<NewsVK/>}/>
+                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/404'} element={<PageError/>}/>
+                        <Route path={'*'} element={<Navigate to={'/404'}/>}/>
+                    </Routes>
+                </FlexWrapper></Container>
             {isLoggedIn && <Footer/>}
         </div>
     )
