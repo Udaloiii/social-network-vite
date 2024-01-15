@@ -4,25 +4,22 @@ import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
 import {User} from "@/layout/users/user/User";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
-import {changePageSizeAC, setUsersAC, setUsersCountAC, UserItemType} from "@/store/reducers/users-reducer";
+import {changePageSizeAC, getUsersTC, UserItemType} from "@/store/reducers/users-reducer";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Pagination} from "@/components/pagination/Pagination";
 import {Loader} from "@/components/loader/Loader";
-import {usersApi} from "@/api/users-api";
 import {Navigate} from "react-router-dom";
-import background from '../../assets/backgrounds/background-profile.webp'
 
 
 export const Users: FC = () => {
     const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const users = useSelector<AppStateType, UserItemType[]>(state => state.users.items)
     const pageSize = useSelector<AppStateType, number>(state => state.users.pageSize)
-
     const usersCount = useSelector<AppStateType, number>(state => state.users.totalCount)
     const dispatch = useAppDispatch()
 
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const [totalCount, setTotalCount] = useState(usersCount)
+    // const [totalCount, setTotalCount] = useState(usersCount)
 
 
     // const currentTableData = useMemo(() => {
@@ -37,13 +34,7 @@ export const Users: FC = () => {
     }
 
     useEffect(() => {
-        usersApi.getUsers(pageSize, currentPage)
-            .then(res => {
-                console.log("USE-EFFECT В USERS.TSX")
-                setTotalCount(res.data.totalCount)
-                dispatch(setUsersAC((res.data.items)))
-                dispatch(setUsersCountAC((res.data.totalCount)))
-            })
+        dispatch(getUsersTC(pageSize, currentPage))
     }, [pageSize, usersCount, currentPage, dispatch]);
 
     if (!isInitialized) {
@@ -55,7 +46,7 @@ export const Users: FC = () => {
                           changePageSize={setPageSizeHandler}/>
             {users.length ? <>
                     <PaginationTopWrapper>
-                        <Pagination totalCount={totalCount} currentPage={currentPage} pageSize={pageSize}
+                        <Pagination totalCount={usersCount} currentPage={currentPage} pageSize={pageSize}
                                     onPageChange={setCurrentPage}
                                     siblingCount={2}/>
                     </PaginationTopWrapper>
@@ -65,7 +56,7 @@ export const Users: FC = () => {
                         )}
                     </FlexWrapper>
                     <PaginationBottomWrapper>
-                        <Pagination totalCount={totalCount} currentPage={currentPage} pageSize={pageSize}
+                        <Pagination totalCount={usersCount} currentPage={currentPage} pageSize={pageSize}
                                     onPageChange={setCurrentPage} siblingCount={2}/>
                     </PaginationBottomWrapper>
                 </>
@@ -78,15 +69,11 @@ export const Users: FC = () => {
 
 const StyleUsers = styled.section`
   position: relative;
-  //background-color: #c9ffeb;
-  background: url(${background}) 0 0/ 350px repeat;
   //width: calc(100vw - 150px);
   flex-grow: 1;
   padding: 20px;
-  border: 1px solid rgba(128, 128, 128, 0.8);
-  border-right: none;
-  border-radius: 6px;
-  color: whitesmoke;
+  border-radius: 12px;
+  background-color: white;
 
   &:last-child {
     padding-bottom: 100px;
