@@ -1,21 +1,20 @@
 import styled from "styled-components";
 import {FC, useEffect, useMemo, useRef, useState} from "react";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
-import {ArticlesType, newsApi} from "@/api/news-api";
+import {ArticlesType} from "@/api/news-api";
 import {Pagination} from "@/components/pagination/Pagination";
 import {CustomSelect} from "@/components/customSelect/CustomSelect";
 import {Loader} from "@/components/loader/Loader";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "@/store/store";
-import {setNewsAC} from "@/store/reducers/news-reducer";
+import {useSelector} from "react-redux";
+import {AppStateType, useAppDispatch} from "@/store/store";
+import {getNewsTC} from "@/store/reducers/news-reducer";
 import {Navigate} from "react-router-dom";
-import background from '../../assets/backgrounds/background-profile.webp'
 
 
 export const News: FC = () => {
     const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const news = useSelector<AppStateType, ArticlesType[]>(state => state.news)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [pageSize, setPageSize] = useState(10)
 
@@ -37,16 +36,7 @@ export const News: FC = () => {
         if (!isMounted.current && news.length) {
             isMounted.current = true;
         } else {
-            !news.length && newsApi.getNews()
-                .then(res => {
-                    // const filteredNews = res.data.articles.filter((article: ArticlesType) => {
-                    //     // Регулярное выражение для проверки наличия русских символов
-                    //     const russianRegex = /[а-яА-ЯЁё]/;
-                    //     return russianRegex.test(article.description);
-                    // });
-                    console.log("USE-EFFECT В NEWS")
-                    dispatch(setNewsAC(res.data.articles))
-                })
+            !news.length && dispatch(getNewsTC())
         }
     }, [dispatch, news.length])
 
@@ -66,7 +56,13 @@ export const News: FC = () => {
                     </PaginationTopWrapper>
                     <FlexWrapper direction={"column"} gap={"30px"}>
                         {currentTableData?.map((el, index) => {
-                            return <div key={index}>
+                            return <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "30px"
+                                }}
+                                key={index}>
                                 <FlexWrapper gap={"20px"}>
                                     <StyleImage src={el.urlToImage} alt=""/>
                                     <FlexWrapper direction={"column"} gap={"20px"}>
@@ -74,7 +70,8 @@ export const News: FC = () => {
                                         <StyleLink href={el.url} target={"_blank"}>подробнее</StyleLink>
                                     </FlexWrapper>
                                 </FlexWrapper>
-
+                                <Separator
+                                    style={{display: `${index === currentTableData?.length - 1 ? "none" : "block"}`}}/>
                             </div>
                         })}
                     </FlexWrapper>
@@ -92,14 +89,10 @@ export const News: FC = () => {
 
 const StyleNews = styled.section`
   position: relative;
-  //background-color: #c9ffeb;
   flex-grow: 1;
   padding: 20px;
-  border: 1px solid rgba(128, 128, 128, 0.8);
-  border-right: none;
-  border-radius: 6px;
-  background: url(${background}) 0 0/250px repeat;
-  color: whitesmoke;
+  border-radius: 12px;
+  background-color: white;
 
 
   &:last-child {
@@ -144,4 +137,10 @@ const PaginationBottomWrapper = styled.div`
   position: absolute;
   bottom: 20px;
   left: 0;
+`
+
+const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgba(128, 128, 128, 0.2);
 `
