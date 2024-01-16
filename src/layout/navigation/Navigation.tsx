@@ -50,11 +50,10 @@ const StyleText = styled.span`
     left: -5px;
     width: 0;
     height: 40px;
-    //background-color: rgba(74, 118, 168, 0.5);
     background-color: rgba(255, 255, 255);
     box-shadow: 0 5px 5px rgba(74, 118, 168, 0.5);
     border-radius: 8px;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
     z-index: -1;
   }
 
@@ -99,6 +98,7 @@ const StyleLink = styled(NavLink)`
 
       &::before {
         width: 140px;
+        transition: .3s ease-in-out;
       }
     }
   }
