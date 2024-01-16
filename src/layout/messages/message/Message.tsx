@@ -9,6 +9,7 @@ import {getTime} from "@/utils/getTime";
 
 
 export const Message: FC = memo(() => {
+    const name = useSelector<AppStateType, string>(state => state.auth.name)
     const messages = useSelector<AppStateType, MessageStateType[]>(state => state.messages)
     const dispatch = useAppDispatch()
     const params = useParams()
@@ -17,6 +18,7 @@ export const Message: FC = memo(() => {
     const [time, setTime] = useState(new Date()) // для времени сообщения
 
     const filterMessage = messages.filter(el => el.id === id)
+    const iconMessage = messages.filter(el => el.id === id)[0].icon
 
 
     let messageId = filterMessage[filterMessage.length - 1].messageId
@@ -24,7 +26,7 @@ export const Message: FC = memo(() => {
 
     const addMessageHandler = useCallback((text: string) => {
         ++messageId
-        dispatch(addMessageAC(id, messageId, text, getTime(time)))
+        dispatch(addMessageAC(id, name, messageId, text, getTime(time)))
     }, [messageId, dispatch])
 
     useEffect(() => {
@@ -36,14 +38,15 @@ export const Message: FC = memo(() => {
             <>
                 <StyleMessageWrapper>
                     {filterMessage.map(el => {
-                        const imageCondition = el.name === "Username" ? "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259" : "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?w=1480&t=st=1701451763~exp=1701452363~hmac=1abea2b533d7a55c075607f01afb47367a4033e84167adde1b38a76694577178"
-
-                        return <StyleMessage key={el.messageId} name={el.name}>
+                        const imageCondition = el.name === name ? "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1480&t=st=1700817612~exp=1700818212~hmac=86a79fc7b83745f8e03378e58710b0b6c590f19d1d6a624ff5bc2227c790e259" : iconMessage
+                        const nameCondition = el.name === name ? name : el.name
+                        const condition = el.name === name
+                        return <StyleMessage key={el.messageId} condition={condition}>
                             <img
                                 src={imageCondition}
                                 alt=""/>
-                            <MessageBlock>
-                                <StyleUserName>{el.name}</StyleUserName>
+                            <MessageBlock condition={condition}>
+                                <StyleUserName>{nameCondition}</StyleUserName>
                                 <MessageTimeWrap>
                                     <StyleText>{el.body}</StyleText>
                                     <MessageTime>{el.messageTime}</MessageTime>
@@ -57,7 +60,8 @@ export const Message: FC = memo(() => {
             <FormWrapper>
                 <AddItemForm addItem={addMessageHandler} placeholder={"write you message"}
                              buttonTitle={"send message"}
-                             as={"textarea"}/>
+                             as={"textarea"}
+                             color={"#4A76A8"}/>
             </FormWrapper>
         </StyleContainer>
     )
@@ -66,18 +70,16 @@ export const Message: FC = memo(() => {
 const StyleContainer = styled.div`
   position: relative;
   flex-grow: 1;
-  //flex: 0 0 auto;
   display: flex;
   justify-content: center;
-  //flex-direction: column;
-  background-color: cornflowerblue;
+  background-color: white;
+  border-radius: 12px;
 `
 const StyleMessageWrapper = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  //border: 1px solid greenyellow;
 
   &:first-child {
     padding-top: 20px;
@@ -87,10 +89,6 @@ const StyleMessageWrapper = styled.div`
     margin-bottom: 170px;
   }
 
-  img {
-    width: 65px;
-    border-radius: 50%;
-  }
 
   &:last-child {
     padding-bottom: 70px;
@@ -105,16 +103,11 @@ const StyleMessageWrapper = styled.div`
   }
 `
 
-const MessageBlock = styled.div`
-  padding: 10px;
+const MessageBlock = styled.div<{ condition: boolean }>`
+  padding: 8px;
   width: 350px;
-  border-radius: 10px 10px 10px 0;
-  background-color: royalblue;
-
-  img {
-    width: 50px;
-    border-radius: 50%;
-  }
+  border-radius: 14px 14px 14px 0;
+  background-color: ${props => props.condition ? "rgba(204, 228, 255, 1)" : "#EBEDF0"};
 `
 
 const StyleText = styled.div`
@@ -130,9 +123,9 @@ const StyleUserName = styled.span`
   text-transform: capitalize;
   font-size: 1.2rem;
 `
-const StyleMessage = styled.div<{ name: string }>`
+const StyleMessage = styled.div<{ condition: boolean }>`
   display: flex;
-  justify-content: ${props => props.name === "Username" ? "flex-end" : "flex-start"};
+  justify-content: ${props => props.condition ? "flex-end" : "flex-start"};
   align-items: flex-end;
   gap: 10px;
 
@@ -141,6 +134,8 @@ const StyleMessage = styled.div<{ name: string }>`
   }
 
   img {
+    width: 50px;
+    border-radius: 50%;
     user-select: none;
     object-fit: cover;
   }
@@ -167,11 +162,11 @@ const FormWrapper = styled.div`
 `
 
 const MessageTime = styled.div`
-  //width: max-content;
   white-space: nowrap;
   font-family: "Roboto Light", sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   align-self: flex-end;
+  color: rgba(0, 0, 0, 0.6);
 `
 
 const MessageTimeWrap = styled.div`
