@@ -6,6 +6,7 @@ import {useAppDispatch} from "@/store/store";
 import {Icon} from "@/components/icon/Icon";
 import {Container} from "@/components/container/Container";
 import {FlexWrapper} from "@/components/flexWrapper/FlexWrapper";
+import {NavLink} from "react-router-dom";
 
 export const Header: FC = () => {
     const dispatch = useAppDispatch()
@@ -14,7 +15,9 @@ export const Header: FC = () => {
         <HeaderStyled>
             <Container>
                 <FlexWrapper justify={"space-between"} align={"center"}>
-                    <Icon iconId={"vk"} vkIcons viewBox="0 0 33 19"/>
+                    <NavLink to={"/"}>
+                        <Icon iconId={"vk"} vkIcons viewBox="0 0 33 19"/>
+                    </NavLink>
                     <Button text={"logout"} addItem={logoutHandler}/>
                 </FlexWrapper>
             </Container>
