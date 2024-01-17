@@ -27,7 +27,6 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
         case "SET-PROFILE":
             return {
                 ...action.profile,
-                // posts: action.id === 26652 ? myPosts : [{
                 posts: myPosts,
                 city: "",
                 country: "",
@@ -70,9 +69,6 @@ export const setProfileAC = (id: number, profile: ProfileResponseType, image: st
     return {type: "SET-PROFILE", id, profile, image} as const
 }
 
-// export const addLikeAC = (postId: number, newValue: boolean) => {
-//     return {type: "ADD-LIKE", postId, newValue} as const
-// }
 export const addLikeAC = (userId: number, postId: number, newValue: boolean) => {
     return {type: "ADD-LIKE", userId, postId, newValue} as const
 }
