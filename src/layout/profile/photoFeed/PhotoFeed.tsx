@@ -101,12 +101,12 @@ const ButtonClosed = styled.button`
 
   &:hover {
     transform: scale(1.6) rotate(90deg);
-    transition: 0.2s;
+    transition: .2s;
   }
 
   &:active {
-    transform: scale(0.9);
-    transition: 0.1s;
+    transform: scale(0.5) rotate(90deg);
+    transition: .2s;
   }
 `
 const StyleButton = styled.button<{ position: string }>`
