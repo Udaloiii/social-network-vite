@@ -38,20 +38,20 @@ export const Profile: FC = () => {
     return (
         <StyleProfile>
             <ProfileWrapper>
-                <FlexWrapper gap={"50px"}>
-                    {isLoading === "loading" ? <Loader/>
-                        :
-                        <UserInfoVK
-                            user={user?.filter(el => el.id === id)[0]}
-                            profile={profile}
-                            image={image}
-                        />}
-                </FlexWrapper>
-                <PhotoFeed/>
-                <PostsVK userId={id} posts={posts}/>
+                {isLoading === "loading" ? <Loader/>
+                    :
+                    <>
+                        <FlexWrapper gap={"50px"}>
+                            <UserInfoVK
+                                user={user?.filter(el => el.id === id)[0]}
+                                profile={profile}
+                                image={image}
+                            />
+                        </FlexWrapper>
+                        <PhotoFeed/>
+                        <PostsVK userId={id} posts={posts}/>
+                    </>}
             </ProfileWrapper>
-
-
         </StyleProfile>
     )
 }
