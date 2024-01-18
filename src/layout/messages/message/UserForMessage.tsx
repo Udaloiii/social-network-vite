@@ -10,12 +10,11 @@ type UserForMessagePropsType = {
 }
 
 export const UserForMessage = ({name, text, id, icon}: UserForMessagePropsType) => {
-    const conditionText = text?.length && text?.length > 100 ? text?.slice(0, 100) : text
+    const conditionText = text?.length && text?.length > 90 ? text?.slice(0, 90) : text
     return (
         <StyleUser>
             <StyleLink to={`/messages/${id}`}>
                 <StyleAvatar
-                    // src={"https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg?w=1480&t=st=1701451763~exp=1701452363~hmac=1abea2b533d7a55c075607f01afb47367a4033e84167adde1b38a76694577178"}
                     src={icon}
                 />
                 <StyleName>{name.slice(0, 10)}</StyleName>
@@ -26,8 +25,6 @@ export const UserForMessage = ({name, text, id, icon}: UserForMessagePropsType) 
 }
 
 const StyleUser = styled.div`
-  //width: 500px;
-  width: max-content;
 `
 
 const StyleAvatar = styled.img`

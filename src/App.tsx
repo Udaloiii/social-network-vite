@@ -11,13 +11,13 @@ import {Loader} from "@/components/loader/Loader";
 import {GoToTop} from "@/components/goToTop/GoToTop";
 import {Container} from "@/components/container/Container";
 import {Snackbar} from "@/components/snackbar/Snackbar";
-import {MessagesWithBlockVK} from "@/layout/messages/MessagesWithBlockVK";
-import {MessageVK} from "@/layout/messages/message/proba/MessageVK";
-import {NewsVK} from "@/layout/news/NewsVK";
 import {Navigation} from "@/layout/navigation/Navigation";
 import {Header} from "@/layout/header/Header";
 import {Profile} from "@/layout/profile/Profile";
 import {Users} from "@/layout/users/Users";
+import {Messages} from "@/layout/messages/Messages";
+import {Message} from "@/layout/messages/message/Message";
+import {News} from "@/layout/news/News";
 
 
 function App() {
@@ -50,14 +50,10 @@ function App() {
                         <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
                         <Route path={'/profile'} element={<Profile/>}/>
                         <Route path={'/users'} element={<Users/>}/>
-                        {/*<Route path={'/users/:id'} element={<UserPage/>}/>*/}
                         <Route path={'/users/:id'} element={<Profile/>}/>
-                        {/*<Route path={'/messages'} element={<MessagesWithBlock/>}/>*/}
-                        <Route path={'/messages'} element={<MessagesWithBlockVK/>}/>
-                        {/*<Route path={'/messages/:id'} element={<Message/>}/>*/}
-                        <Route path={'/messages/:id'} element={<MessageVK/>}/>
-                        {/*<Route path={'/news'} element={<News/>}/>*/}
-                        <Route path={'/news'} element={<NewsVK/>}/>
+                        <Route path={'/messages'} element={<Messages/>}/>
+                        <Route path={'/messages/:id'} element={<Message/>}/>
+                        <Route path={'/news'} element={<News/>}/>
                         <Route path={'/login'} element={<Login/>}/>
                         <Route path={'/404'} element={<PageError/>}/>
                         <Route path={'*'} element={<Navigate to={'/404'}/>}/>
