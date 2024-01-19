@@ -18,6 +18,7 @@ import {Users} from "@/layout/users/Users";
 import {Messages} from "@/layout/messages/Messages";
 import {Message} from "@/layout/messages/message/Message";
 import {News} from "@/layout/news/News";
+import {MyPhotos} from "@/layout/myPhoto/MyPhotos";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
                         <Route path={'/users/:id'} element={<Profile/>}/>
                         <Route path={'/messages'} element={<Messages/>}/>
                         <Route path={'/messages/:id'} element={<Message/>}/>
+                        <Route path={'/photos'} element={<MyPhotos/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/login'} element={<Login/>}/>
                         <Route path={'/404'} element={<PageError/>}/>
