@@ -16,6 +16,10 @@ export const Navigation: FC = () => {
             <StyleLink to='/messages'>
                 <Icon iconId={"messages"} vkIcons/>
                 <StyleText>Messages</StyleText></StyleLink>
+            <StyleLink to='/photos'>
+                <Icon iconId={"photo"} vkIcons/>
+                <StyleText>My photos</StyleText>
+            </StyleLink>
             <StyleLink to='/news'>
                 <Icon iconId={"news"} vkIcons/>
                 <StyleText>News</StyleText>
