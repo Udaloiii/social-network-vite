@@ -7,6 +7,7 @@ import {appReducer} from "@/store/reducers/app-reducer";
 import {authReducer} from "@/store/reducers/auth-reducer";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
+import {photosReducer} from "@/store/reducers/photos-reducer";
 
 const mainReducer = combineReducers({
     // posts: postsReducer,
@@ -16,6 +17,7 @@ const mainReducer = combineReducers({
     messages: messagesReducer,
     profile: profileReducer, // потом можно убрать
     news: newsReducer,
+    photos: photosReducer
 })
 export const store = createStore(mainReducer, applyMiddleware(thunk))
 
