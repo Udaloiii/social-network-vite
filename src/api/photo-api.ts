@@ -32,7 +32,7 @@ export type PhotosDataType = {
     "hits": PhotoType[]
 }
 export const photosApi = {
-    getPhotos: (pageSize: number) => {
-        return axios.get<PhotosDataType>(`https://pixabay.com/api/?key=41919354-56814b908f1736074059e88af&q=trips&image_type=photo&lang=ru&per_page=${pageSize}`)
+    getPhotos: () => {
+        return axios.get<PhotosDataType>(`https://pixabay.com/api/?key=41919354-56814b908f1736074059e88af&q=adventure&image_type=photo&lang=ru&per_page=200`)
     }
 }
