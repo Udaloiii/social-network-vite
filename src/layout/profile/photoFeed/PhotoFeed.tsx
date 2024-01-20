@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {FC, useState} from "react";
-import {AnimatePresence, motion} from "framer-motion";
-import {Icon} from "@/components/icon/Icon";
+import {AnimatePresence} from "framer-motion";
 import photo1 from "../../../assets/photoFeed/wonderland-forest-with-mushrooms.webp"
 import photo2 from "../../../assets/photoFeed/woman-eating-apple.webp"
 import photo3 from "../../../assets/photoFeed/mountains-cloudy-sky.webp"
 import photo4 from "../../../assets/photoFeed/skateboarder-doing-trick.webp"
 import photo5 from "../../../assets/photoFeed/underwater-world-with-corals.webp"
+import {Modal} from "@/components/modal/Modal";
 
 const arrOfImg = [
     photo1, photo2, photo3, photo4, photo5
@@ -29,26 +29,8 @@ export const PhotoFeed: FC = () => {
                                                         onClick={() => setSelectedImg(img)}/>)}
             </ImagesWrap>
             <AnimatePresence>{selectedImg && (
-                <Modal
-                    initial={{opacity: 0, scale: 0.2}}
-                    animate={{opacity: 1, scale: 1}}
-                    transition={{duration: 0.3}}
-                    exit={{opacity: 0, scale: 0.2}}
-                    img={selectedImg}
-                >
-                    <ButtonClosed onClick={() => setSelectedImg(null)}>
-                        <Icon iconId={"delete"} vkIcons width="18"
-                              height="18"
-                              viewBox="0 0 24 24"/>
-                    </ButtonClosed>
-                    <StyleButton disabled={selectedImg === arrOfImg[0]} onClick={handlerSwitcherDown} position={"left"}>
-                        <Icon iconId={"left"} vkIcons width="34" height="34" viewBox="0 0 48 48"/>
-                    </StyleButton>
-                    <StyleButton disabled={selectedImg === arrOfImg[arrOfImg.length - 1]}
-                                 onClick={handlerSwitcherUp} position={"right"}>
-                        <Icon iconId={"right"} vkIcons width="34" height="34" viewBox="0 0 48 48"/>
-                    </StyleButton>
-                </Modal>
+                <Modal selectedImg={selectedImg} onClickClosed={() => setSelectedImg(null)} onClickLeft={handlerSwitcherDown} onClickRight={handlerSwitcherUp}
+                arrOfImage={arrOfImg}/>
             )}</AnimatePresence>
         </Wrap>
     )
@@ -69,71 +51,6 @@ const StyleImg = styled.img`
   border-radius: 12px;
   cursor: pointer;
 `
-
-const Modal = styled(motion.div)<{ img: string }>`
-  width: 1000px;
-  height: 600px;
-  position: fixed;
-  top: 10%;
-  z-index: 10;
-  border-radius: 12px;
-  box-shadow: 0 5px 10px 5px #ffffff;
-  background: url(${props => props.img || ""}) 0 0 / cover;
-`
-const ButtonClosed = styled.button`
-  position: absolute;
-  top: -30px;
-  right: -40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: transparent;
-  border-radius: 30%;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: #2a2a2a;
-
-  svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  &:hover {
-    transform: scale(1.6) rotate(90deg);
-    transition: .2s;
-  }
-
-  &:active {
-    transform: scale(0.5) rotate(90deg);
-    transition: .2s;
-  }
-`
-const StyleButton = styled.button<{ position: string }>`
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: ${props => props.position === "left" ? "" : "0"};
-  background-color: transparent;
-  border: none;
-  color: #4a76a8;
-
-  &:active {
-    top: 50%;
-    transform: scale(0.97) translateY(-50%);
-    transition: .3s;
-  }
-
-  &:disabled {
-    color: #edfff8;
-    opacity: 0.3;
-    top: 50%;
-    transform: scale(0.9) translateY(-50%);
-  }
-`
-
 
 const DescriptionWrap = styled.div`
   display: flex;
