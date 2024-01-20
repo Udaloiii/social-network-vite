@@ -68,25 +68,25 @@ export const Users: FC = () => {
 }
 
 const StyleUsers = styled.section`
-  position: relative;
-  //width: calc(100vw - 150px);
-  flex-grow: 1;
-  padding: 20px;
-  border-radius: 12px;
-  background-color: white;
+    position: relative;
+    //width: calc(100vw - 150px);
+    flex-grow: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
 
-  &:last-child {
-    padding-bottom: 100px;
-  }
+    &:last-child {
+        padding-bottom: 100px;
+    }
 `
 const PaginationTopWrapper = styled.div`
-  margin-left: -20px;
-  padding-top: 20px;
-  padding-bottom: 50px;
+    margin-left: -20px;
+    padding-top: 20px;
+    padding-bottom: 50px;
 `
 
 const PaginationBottomWrapper = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 0;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
 `
