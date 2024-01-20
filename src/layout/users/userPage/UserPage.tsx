@@ -21,7 +21,7 @@ export const UserPage = () => {
                     src={user.icon}/>
                 <UserInfo user={user}/>
             </FlexWrapper>
-            <Posts id={id}/>
+            <Posts userId={id} posts={user.posts}/>
         </StyleContainer>
     )
 }
