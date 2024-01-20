@@ -45,7 +45,7 @@ export const MyPhotos: FC = () => {
 
     useEffect(() => {
         !photos?.length && dispatch(getPhotosTC())
-    }, [dispatch, pageSize]);
+    }, [dispatch, pageSize, photos?.length]);
 
 
     return (
@@ -62,7 +62,7 @@ export const MyPhotos: FC = () => {
                     />
                 })}
             </PhotosWrap>
-            <AnimatePresence initial={false} >
+            <AnimatePresence initial={false}>
                 {selectedImg && (
                     <Modal selectedImg={selectedImg} onClickClosed={() => setSelectedImg(null)}
                            onClickLeft={handlerSwitcherDown} onClickRight={handlerSwitcherUp}

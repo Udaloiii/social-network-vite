@@ -9,9 +9,9 @@ import {UserItemType} from "@/store/reducers/users-reducer";
 import {Loader} from "@/components/loader/Loader";
 import userAvatar from '../../assets/avatars/user.webp'
 import {RequestStatusType} from "@/store/reducers/app-reducer";
-import {UserInfoVK} from "@/layout/profile/userInfo/UserInfoVK";
-import {PostsVK} from "@/layout/profile/posts/PostsVK";
 import {PhotoFeed} from "@/layout/profile/photoFeed/PhotoFeed";
+import {Posts} from "@/layout/profile/posts/Posts";
+import {UserInfo} from "@/layout/profile/userInfo/UserInfo";
 
 
 export const Profile: FC = () => {
@@ -42,14 +42,14 @@ export const Profile: FC = () => {
                     :
                     <>
                         <FlexWrapper gap={"50px"}>
-                            <UserInfoVK
+                            <UserInfo
                                 user={user?.filter(el => el.id === id)[0]}
                                 profile={profile}
                                 image={image}
                             />
                         </FlexWrapper>
                         <PhotoFeed/>
-                        <PostsVK userId={id} posts={posts}/>
+                        <Posts userId={id} posts={posts}/>
                     </>}
             </ProfileWrapper>
         </StyleProfile>
@@ -57,15 +57,15 @@ export const Profile: FC = () => {
 }
 
 const StyleProfile = styled.section`
-  flex-grow: 1;
-  border-radius: 12px;
+    flex-grow: 1;
+    border-radius: 12px;
 `
 const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
-  textarea {
-    width: 325px;
-  }
+    textarea {
+        width: 325px;
+    }
 `
