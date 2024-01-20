@@ -22,9 +22,9 @@ export const setPhotosAC = (photos: PhotoType[]) => {
 }
 
 // Thunk
-export const getPhotosTC = (pageSize:number) => (dispatch: Dispatch) => {
+export const getPhotosTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    photosApi.getPhotos(pageSize)
+    photosApi.getPhotos()
         .then(res => {
             dispatch(setAppStatusAC("succeeded"))
             dispatch(setPhotosAC(res.data.hits))
