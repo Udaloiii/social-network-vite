@@ -9,11 +9,14 @@ import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "@/store/store";
 import {getNewsTC} from "@/store/reducers/news-reducer";
 import {Navigate} from "react-router-dom";
+import {RequestStatusType} from "@/store/reducers/app-reducer";
+import {Fail} from "@/components/fail/Fail";
 
 
 export const News: FC = () => {
     const isInitialized = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
     const news = useSelector<AppStateType, ArticlesType[]>(state => state.news)
+    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [pageSize, setPageSize] = useState(10)
@@ -80,67 +83,68 @@ export const News: FC = () => {
                                     onPageChange={setCurrentPage} siblingCount={2}/>
                     </PaginationBottomWrapper>
                 </>
-                : <Loader/>
+                : status === "loading" && <Loader/>
             }
+            {status === "failed" && <Fail/>}
         </StyleNews>
 
     )
 }
 
 const StyleNews = styled.section`
-  position: relative;
-  flex-grow: 1;
-  padding: 20px;
-  border-radius: 12px;
-  background-color: white;
+    position: relative;
+    flex-grow: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
 
 
-  &:last-child {
-    padding-bottom: 100px;
-  }
-
-  ${FlexWrapper} {
-    padding-top: 20px;
-    max-width: calc(100vw - 230px);
-
-    &:nth-child(1) {
-      padding-top: 50px;
+    &:last-child {
+        padding-bottom: 100px;
     }
-  }
+
+    ${FlexWrapper} {
+        padding-top: 20px;
+        max-width: calc(100vw - 230px);
+
+        &:nth-child(1) {
+            padding-top: 50px;
+        }
+    }
 
 `
 
 const StyleImage = styled.img`
-  width: 225px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
+    width: 225px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
 
 `
 const StyleLink = styled.a`
-  color: #2e3288;
-  transition: .2s;
-  width: max-content;
-
-  &:hover {
-    color: #5559e5;
+    color: #2e3288;
     transition: .2s;
-  }
+    width: max-content;
+
+    &:hover {
+        color: #5559e5;
+        transition: .2s;
+    }
 `
 
 const PaginationTopWrapper = styled.div`
-  margin-left: -20px;
-  padding-top: 20px;
+    margin-left: -20px;
+    padding-top: 20px;
 `
 
 const PaginationBottomWrapper = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 0;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
 `
 
 const Separator = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: rgba(128, 128, 128, 0.2);
+    width: 100%;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.2);
 `
