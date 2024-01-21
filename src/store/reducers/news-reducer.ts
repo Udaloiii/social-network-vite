@@ -1,6 +1,6 @@
 import {ArticlesType, newsApi} from "@/api/news-api";
 import {Dispatch} from "redux";
-import {setAppStatusAC} from "@/store/reducers/app-reducer";
+import {setAppErrorAC, setAppStatusAC} from "@/store/reducers/app-reducer";
 
 const initialState = [] as ArticlesType[]
 // Type ACTION
@@ -29,7 +29,9 @@ export const getNewsTC = () => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC("succeeded"))
             dispatch(setNewsAC(res.data.articles))
         })
-        .catch(() => {
+        .catch((err) => {
             // handleServerError(err, dispatch)
+            dispatch(setAppStatusAC("failed"))
+            dispatch(setAppErrorAC(err.message))
         })
 }
