@@ -16,16 +16,8 @@ export type DataType = {
     status: string
     totalResults: number
 }
-
-const instance = axios.create({
-    baseURL: "https://newsapi.org/v2/everything?q=all&language=ru&sortBy=publishedAt",
-    headers: {
-        "X-Api-Key": "fa43ff6276f44c29aed1a8510204d829"
-    }
-})
-
 export const newsApi = {
     getNews: () => {
-        return instance.get<DataType>("")
+        return axios.get<DataType>("https://newsapi.org/v2/everything?q=all&language=ru&sortBy=publishedAt&apiKey=fa43ff6276f44c29aed1a8510204d829")
     }
 }
