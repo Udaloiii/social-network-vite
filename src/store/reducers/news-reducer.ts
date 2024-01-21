@@ -30,7 +30,6 @@ export const getNewsTC = () => (dispatch: Dispatch) => {
             dispatch(setNewsAC(res.data.articles))
         })
         .catch((err) => {
-            // handleServerError(err, dispatch)
             dispatch(setAppStatusAC("failed"))
             dispatch(setAppErrorAC(err.response.data.message))
         })
