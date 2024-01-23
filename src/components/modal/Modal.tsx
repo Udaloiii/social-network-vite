@@ -29,7 +29,7 @@ export const Modal: FC<ModalPropsType> = ({
             exit={{opacity: 0, scale: 0.8}}
         >
             <ButtonClosed onClick={() => onClickClosed?.(null)}>
-                <Icon iconId={"delete"} vkIcons width="18"
+                <Icon iconId={"closed"} vkIcons width="18"
                       height="18"
                       viewBox="0 0 24 24"/>
             </ButtonClosed>
@@ -56,8 +56,8 @@ const StyleModal = styled(motion.div)<{ img: string }>`
 `
 const ButtonClosed = styled.button`
     position: absolute;
-    top: -30px;
-    right: -40px;
+    top: -37px;
+    right: -47px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,11 +66,17 @@ const ButtonClosed = styled.button`
     border-radius: 30%;
     transition: 0.2s;
     font-size: 1rem;
-    color: #2a2a2a;
+    color: #000000;
 
     svg {
         width: 40px;
         height: 40px;
+        box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5) inset;
+        border-radius: 50%;
+
+        &:hover {
+            box-shadow: 0 0 5px 2px rgba(255, 255, 255);
+        }
     }
 
     &:hover {
@@ -79,7 +85,7 @@ const ButtonClosed = styled.button`
     }
 
     &:active {
-        transform: scale(0.5) rotate(90deg);
+        transform: scale(0.8) rotate(90deg);
         transition: .2s;
     }
 `
