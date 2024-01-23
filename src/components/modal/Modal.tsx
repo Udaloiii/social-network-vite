@@ -45,10 +45,11 @@ export const Modal: FC<ModalPropsType> = ({
 }
 
 const StyleModal = styled(motion.div)<{ img: string }>`
-    width: 1000px;
-    height: 600px;
+    width: 80vw;
+    height: 80vh;
     position: fixed;
     top: 10%;
+    left: 10%;
     z-index: 10;
     border-radius: 12px;
     box-shadow: 0 5px 10px 5px #ffffff;
