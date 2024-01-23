@@ -45,8 +45,8 @@ const Wrap = styled.div`
   gap: 30px;
 `
 const StyleImg = styled.img`
-  width: 200px;
-  height: 130px;
+  max-width: 200px;
+  max-height: 130px;
   object-fit: cover;
   border-radius: 12px;
   cursor: pointer;
