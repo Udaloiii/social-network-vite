@@ -20,7 +20,6 @@ export const Posts: FC<PostsPropsType> = ({userId, posts}: PostsPropsType) => {
         dispatch(addPostAC(userId, text, getTime(time)))
     }
     const addLike = (postId: number, newValue: boolean) => {
-        console.log(`like:${newValue}`)
         dispatch(addLikeAC(userId, postId, newValue))
     }
 

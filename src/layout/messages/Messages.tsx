@@ -63,7 +63,6 @@ export const Messages: FC = () => {
                 .then(res => {
                     dispatch(setMessagesAC(res.data))
                 })
-            console.log("USE-EFFECT В MESSAGES")
         }
     }, [messages.length, dispatch]);
 
